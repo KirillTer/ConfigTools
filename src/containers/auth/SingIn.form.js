@@ -26,26 +26,25 @@ const SingInView = ({
       <Grid.Column style={{ maxWidth: 450 }}>
         <Header as="h2" icon color="violet" textAlign="center">
           <Icon name="puzzle piece" color="violet" />
-          Sing In
         </Header>
         <Form size="large" onSubmit={handleSubmit}>
           <Segment stacked>
+            <Header as='h5'>Username</Header>
             <Field
               name="email"
-              icon="mail"
               component={renderTextField}
               label="Email"
               type="email"
             />
+            <Header as='h5'>Password</Header>
             <Field
               name="password"
-              icon="lock"
               component={renderTextField}
               label="Password"
               type="password"
             />
             <Button color="blue" fluid size="large" type="submit">
-              Submit
+              Login
             </Button>
           </Segment>
         </Form>

@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { Switch } from "react-router-dom";
 
 import ProtectedRouter from "../../components/ProtectedRoute";
-import Exercises from '../home/Home.connect'
-// import Auth from '../auth/Auth.connect'
+import Home from '../home/Home.connect'
+import Exercises from "../exercises/Exercises.connect";
 
 const MainView = ({mainData, loadMain, match}) => {
 
@@ -15,8 +15,8 @@ const MainView = ({mainData, loadMain, match}) => {
     <>
     {console.log('Main selector - ', mainData)}
     <Switch>
-      <ProtectedRouter path={match.path + "/home"} component={Exercises} />
-      {/* <Route path={match.path + "/auth"} component={Auth} /> */}
+      <ProtectedRouter path={match.path + "/home"} component={Home} />
+      <ProtectedRouter path={match.path + "/exercises"} component={Exercises} />
     </Switch>
     </>
   );

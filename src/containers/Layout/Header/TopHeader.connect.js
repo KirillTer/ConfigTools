@@ -1,7 +1,7 @@
 import {connect} from "react-redux";
 import { LOGOUT_START } from '../../../store/actionTypes'
 import { getLoginSelector } from "../../../store/selectors";
-import HeaderView from './Header.view';
+import TopHeader from './TopHeader.view';
 
 
 const mapStateToProps = (state) => {
@@ -18,4 +18,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderView);
+export default connect(mapStateToProps, mapDispatchToProps)(TopHeader);

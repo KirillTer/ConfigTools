@@ -26,26 +26,23 @@ const SingUpView = ({
       <Grid.Column style={{ maxWidth: 450 }}>
         <Header as="h2" icon color="orange" textAlign="center">
           <Icon name="puzzle piece" color="orange" />
-          Sing Up
         </Header>
         <Form size="large" onSubmit={handleSubmit}>
           <Segment stacked>
             <Field
               name="email"
-              icon="mail"
               component={renderTextField}
               label="Email"
               type="email"
             />
             <Field
               name="password"
-              icon="lock"
               component={renderTextField}
               label="Password"
               type="password"
             />
             <Button color="orange" fluid size="large" type="submit">
-              Submit
+              Register
             </Button>
           </Segment>
         </Form>

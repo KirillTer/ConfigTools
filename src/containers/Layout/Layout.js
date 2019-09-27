@@ -1,25 +1,31 @@
 import React from "react";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
+import { Grid } from 'semantic-ui-react'
 
-import Header from "./Header/Header.connect";
+import TopHeader from "./Header/TopHeader.connect";
+import Menu from "./Menu";
 import Footer from "./Footer";
-import NotFound from "./NotFound";
+import NotFound from "../../components/NotFound";
 import MainView from "../main-page/Main.connect";
-import AuthView from "../auth/Auth.connect";
 
-const Layout = () => {
-
+const Layout = ({match}) => {
   return (
-    <>
-      <Header />
-        <Switch>
-          <Route exact path="/" render={() => (<Redirect to="/auth"/>)}/>
-          <Route path="/main" component={MainView} />
-          <Route path="/auth" component={AuthView} />
-          <Route component={NotFound} />
-        </Switch>
-      <Footer />
-    </>
+    <Grid>
+      <Grid.Row  columns={2}>
+        <Grid.Column width={2} style={{ background: "#4c3c4c", fontSize: "1rem" }}>
+          <Menu />
+        </Grid.Column>
+
+        <Grid.Column width={14} style={{ padding: 0 }}>
+          <TopHeader />
+          <Switch>
+            <Route path={match.path} component={MainView} />
+            <Route component={NotFound} />
+          </Switch>
+          <Footer />
+        </Grid.Column>
+      </Grid.Row>
+    </Grid>
   );
 };
 

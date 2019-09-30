@@ -1,7 +1,9 @@
 import React from "react";
 import { reduxForm, Field } from "redux-form";
-import { Grid, Form, Segment, Button, Header, Icon } from 'semantic-ui-react'
+import { NavLink } from "react-router-dom";
+import { Grid, Form, Segment, Button, Header, Image, Checkbox } from 'semantic-ui-react'
 import renderTextField from './renderTextField'
+import logoImage from '../../assets/img_playtechOneLogo.svg';
 
 const validate = ({email, password}) => {
   const errors = {}
@@ -23,20 +25,18 @@ const SingInView = ({
 }) => {
   return (
   <Grid textAlign="center" verticalAlign="middle" className="app">
-      <Grid.Column style={{ maxWidth: 450 }}>
-        <Header as="h2" icon color="violet" textAlign="center">
-          <Icon name="puzzle piece" color="violet" />
-        </Header>
-        <Form size="large" onSubmit={handleSubmit}>
+      <Grid.Column style={{ maxWidth: 400 }}>
+        <Image src={logoImage} size='medium' centered style={{ marginBottom: '2rem'}}/>
+        <Form size="medium" onSubmit={handleSubmit}>
           <Segment stacked>
-            <Header as='h5'>Username</Header>
+            <Header as='h5' floated='left'>Username</Header>
             <Field
               name="email"
               component={renderTextField}
               label="Email"
               type="email"
             />
-            <Header as='h5'>Password</Header>
+            <Header as='h5' floated='left'>Password</Header>
             <Field
               name="password"
               component={renderTextField}
@@ -46,6 +46,8 @@ const SingInView = ({
             <Button color="blue" fluid size="large" type="submit">
               Login
             </Button>
+            <Checkbox label='Remember me' style={{ marginTop: '1rem', marginRight: 0,  display: 'block', maxWidth: 150, textAlign: 'left' }}/>
+            <NavLink to={"/main/home"} style={{ display: 'block', textAlign: 'right', top: -19, left: 190, position: 'relative', maxWidth: 150 }}>Forget password?</NavLink>
           </Segment>
         </Form>
       </Grid.Column>

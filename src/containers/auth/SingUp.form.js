@@ -24,7 +24,7 @@ const SingUpView = ({
   handleSubmit
 }) => {
   return (
-    <Grid textAlign="center" verticalAlign="middle" className="app">
+    <Grid textAlign="center" style={{ marginTop: '10rem'}}>
       <Grid.Column style={{ maxWidth: 400 }}>
         <Image src={logoImage} size='medium' centered style={{ marginBottom: '2rem'}}/>
         <Form size="large" onSubmit={handleSubmit}>

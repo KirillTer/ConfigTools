@@ -20,11 +20,16 @@ function* callSingIn(action) {
     try {
         const userResult = yield call(singInApi, action.payload)
         console.log('SAGA after API SingIN user - ', userResult)
-        yield put({ type: SINGIN_SUCCESS, payload: userResult });
-        localStorage.setItem("token", userResult.l);
-        history.push('/main/home')
+        if (userResult.code === 'auth/wrong-password' || userResult.code === 'auth/too-many-requests') {
+            throw new Error(userResult.message);
+        } else {
+            yield put({ type: SINGIN_SUCCESS, payload: userResult });
+            localStorage.setItem("token", userResult.l);
+            history.push('/main/home')
+        }
     } catch(error) {
-        yield put({ type: SINGIN_FAILURE, payload: error });
+        console.log('SAGA after API SingIN ERROR - ', error.message)
+        yield put({ type: SINGIN_FAILURE, payload: error.message });
     }
 }
 function* callSingUp(action) {
@@ -32,9 +37,13 @@ function* callSingUp(action) {
     try {
         const userResult = yield call(singUpApi, action.payload)
         console.log('SAGA after API SingUP user - ', userResult)
-        yield put({ type: SINGUP_SUCCESS, payload: userResult });
-        localStorage.setItem("token", userResult.l);
-        history.push('/main/home')
+        if (userResult.code === 'auth/wrong-password') {
+            throw new Error(userResult.message);
+        } else {
+            yield put({ type: SINGUP_SUCCESS, payload: userResult });
+            localStorage.setItem("token", userResult.l);
+            history.push('/main/home')
+        }
     } catch(error) {
         yield put({ type: SINGUP_FAILURE, payload: error });
     }
@@ -42,8 +51,6 @@ function* callSingUp(action) {
 function* callLogOut(action) {
     console.log('SAGA action LogOut payload - ', action)
     try {
-        // const userResult = yield call(singInApi, action.payload)
-        // console.log('SAGA after API SingIN user - ', userResult)
         yield put({ type: LOGOUT_SUCCESS });
         localStorage.removeItem("token");
         history.push('/auth');

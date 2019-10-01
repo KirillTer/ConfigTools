@@ -3,23 +3,28 @@ import {SINGIN_SUCCESS, SINGIN_FAILURE,
         SINGUP_SUCCESS, SINGUP_FAILURE} from '../actionTypes'
 
 const initialState = {
-    logined: Boolean(localStorage.getItem('token'))
+    user: {},
+    logined: Boolean(localStorage.getItem('token')),
+    error: ''
 }
 
 export default (state = initialState, {type, payload}) => {
     switch (type) {
         case SINGIN_SUCCESS:
             console.log('SINGIN_SUCCESS', payload)
+            state.error = '';
             state.user = payload;
             state.logined = true;
             return;
         case SINGUP_SUCCESS:
             console.log('SINGUP_SUCCESS', payload)
+            state.error = '';
             state.user = payload;
             state.logined = true;
             return;
         case LOGOUT_SUCCESS:
             console.log('LOGOUT_SUCCESS')
+            state.error = '';
             state.user = null;
             state.logined = false;
             return;

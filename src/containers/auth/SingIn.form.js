@@ -1,7 +1,7 @@
 import React from "react";
 import { reduxForm, Field } from "redux-form";
 import { NavLink } from "react-router-dom";
-import { Grid, Form, Segment, Button, Header, Image, Checkbox } from 'semantic-ui-react'
+import { Grid, Form, Segment, Button, Header, Image, Checkbox, Message } from 'semantic-ui-react'
 import renderTextField from './renderTextField'
 import logoImage from '../../assets/img_playtechOneLogo.svg';
 
@@ -21,13 +21,14 @@ const validate = ({email, password}) => {
 }
 
 const SingInView = ({
-  handleSubmit
+  handleSubmit,
+  errorLogin
 }) => {
   return (
-  <Grid textAlign="center" verticalAlign="middle" className="app">
+    <Grid textAlign="center" style={{ marginTop: '10rem'}}>
       <Grid.Column style={{ maxWidth: 400 }}>
         <Image src={logoImage} size='medium' centered style={{ marginBottom: '2rem'}}/>
-        <Form size="medium" onSubmit={handleSubmit}>
+        <Form size="large" onSubmit={handleSubmit} error>
           <Segment stacked>
             <Header as='h5' floated='left'>Username</Header>
             <Field
@@ -48,6 +49,10 @@ const SingInView = ({
             </Button>
             <Checkbox label='Remember me' style={{ marginTop: '1rem', marginRight: 0,  display: 'block', maxWidth: 150, textAlign: 'left' }}/>
             <NavLink to={"/main/home"} style={{ display: 'block', textAlign: 'right', top: -19, left: 190, position: 'relative', maxWidth: 150 }}>Forget password?</NavLink>
+            {errorLogin && <Message
+              error
+              content={errorLogin}
+            />}
           </Segment>
         </Form>
       </Grid.Column>

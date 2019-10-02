@@ -1,16 +1,25 @@
 import React from 'react';
-import { Header, Grid, Icon } from "semantic-ui-react";
+import { Menu, Icon } from "semantic-ui-react";
 
 const SideMenu = () => (
-    <Grid.Column>
-        <Grid.Row style={{ padding: "1rem 0 0 0.5rem", margin: 0 }}>
-        {/* App Header */}
-        <Header inverted floated="left" as="h2">
+    <>
+        <Menu.Item as='a'>
+            <Icon name='home' />
+            Home
+        </Menu.Item>
+        <Menu.Item as='a'>
+            <Icon name='gamepad' />
+            Games
+        </Menu.Item>
+        <Menu.Item as='a'>
+            <Icon name='camera' />
+            Channels
+        </Menu.Item>
+        <Menu.Item as='a'>
             <Icon name="code" />
-            <Header.Content>Config Tools</Header.Content>
-        </Header>
-        </Grid.Row>
-    </Grid.Column>
+            Code
+        </Menu.Item>
+    </>
 )
 
 export default SideMenu

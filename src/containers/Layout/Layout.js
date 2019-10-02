@@ -1,30 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
 import { Route, Switch } from "react-router-dom";
-import { Grid } from 'semantic-ui-react'
+import { Grid, Menu, Segment, Sidebar } from 'semantic-ui-react'
 
 import TopHeader from "./Header/TopHeader.connect";
-import Menu from "./Menu";
+import SideMenu from "./Menu";
 import Footer from "./Footer";
 import NotFound from "../../components/NotFound";
 import MainView from "../main-page/Main.connect";
 
 const Layout = ({match}) => {
-  return (
-    <Grid>
-      <Grid.Row  columns={2}>
-        <Grid.Column width={2} style={{ background: "#4c3c4c", fontSize: "1rem" }}>
-          <Menu />
-        </Grid.Column>
 
-        <Grid.Column width={14} style={{ padding: 0 }}>
-          <TopHeader />
-          <Switch>
-            <Route path={match.path} component={MainView} />
-            <Route component={NotFound} />
-          </Switch>
-          <Footer />
-        </Grid.Column>
-      </Grid.Row>
+  const [visible, setVisible] = useState(true);
+
+  const handleDisplay = () => {
+    console.log('Header clicked - ', !visible);
+    setVisible(!visible)
+  }
+
+  return (
+    <Grid style={{ height: 'calc(100% - 126px)' }}>
+      <Grid.Column width={16} style={{ paddingBottom: 0}}>
+        <TopHeader onDisplay={handleDisplay}/>
+      </Grid.Column>
+
+        <Sidebar.Pushable as={Segment} style={{ marginTop: 0, marginBottom: 0, border: 'none'}}>
+          <Sidebar
+            as={Menu}
+            animation='push'
+            icon='labeled'
+            inverted
+            onHide={() => setVisible(false)}
+            vertical
+            visible={visible}
+            width='thin'
+          >
+            <SideMenu />
+          </Sidebar>
+
+          <Sidebar.Pusher style={{ width: '100%' }}>
+            <Segment basic>
+              <Switch>
+                <Route path={match.path} component={MainView} />
+                <Route component={NotFound} />
+              </Switch>
+            </Segment>
+          </Sidebar.Pusher>
+        </Sidebar.Pushable>
+
+      <Grid.Column width={16} style={{ padding: '0 1rem 0 1rem'}}>
+        <Footer />
+      </Grid.Column>
     </Grid>
   );
 };

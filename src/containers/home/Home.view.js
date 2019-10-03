@@ -1,33 +1,21 @@
 import React from "react";
-import { Grid, Image } from 'semantic-ui-react'
+// import { Grid } from 'semantic-ui-react'
+// import { categories } from '../../helpers/categories'
+import Jackpot from "../main-page/jackpot/Jackpot.connect";
+import Games from "../main-page/games/Games.connect";
+import Channels from "../main-page/channels/Channels.connect";
+import Code from "../main-page/code/Code.connect";
+
+// const Components = [Jackpot, Games, Channels, Code];
 
 const ExercisesView = () => {
   return (
-    <Grid columns='4' centered>
-      <Grid.Row>
-        <Grid.Column width={4}>
-          <Image src='https://react.semantic-ui.com/images/wireframe/media-paragraph.png' />
-        </Grid.Column>
-        <Grid.Column width={4}>
-          <Image src='https://react.semantic-ui.com/images/wireframe/media-paragraph.png' />
-        </Grid.Column>
-        <Grid.Column width={4}>
-          <Image src='https://react.semantic-ui.com/images/wireframe/media-paragraph.png' />
-        </Grid.Column>
-      </Grid.Row>
-
-      <Grid.Row>
-        <Grid.Column width={4}>
-          <Image src='https://react.semantic-ui.com/images/wireframe/media-paragraph.png' />
-        </Grid.Column>
-        <Grid.Column width={4}>
-          <Image src='https://react.semantic-ui.com/images/wireframe/media-paragraph.png' />
-        </Grid.Column>
-        <Grid.Column width={4}>
-          <Image src='https://react.semantic-ui.com/images/wireframe/media-paragraph.png' />
-        </Grid.Column>
-      </Grid.Row>
-    </Grid>
+    <div style={{ marginBottom: 50 }}>
+      <Jackpot />
+      <Games />
+      <Channels />
+      <Code />    
+    </div>
   );
 };
 

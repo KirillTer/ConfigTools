@@ -10,7 +10,7 @@ import MainView from "../main-page/Main.connect";
 
 const Layout = ({match}) => {
 
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
 
   const handleDisplay = () => {
     console.log('Header clicked - ', !visible);
@@ -18,12 +18,12 @@ const Layout = ({match}) => {
   }
 
   return (
-    <Grid style={{ height: 'calc(100% - 126px)' }}>
+    <Grid>
       <Grid.Column width={16} style={{ paddingBottom: 0}}>
         <TopHeader onDisplay={handleDisplay}/>
       </Grid.Column>
 
-        <Sidebar.Pushable as={Segment} style={{ marginTop: 0, marginBottom: 0, border: 'none'}}>
+        <Sidebar.Pushable as={Segment} style={{ minHeight: 'calc(100vh - 126px)', marginTop: 0, marginBottom: 0, border: 'none'}}>
           <Sidebar
             as={Menu}
             animation='push'

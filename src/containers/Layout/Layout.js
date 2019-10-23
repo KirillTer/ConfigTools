@@ -27,11 +27,10 @@ const Layout = ({match}) => {
           <Sidebar
             as={Menu}
             animation='push'
-            icon='labeled'
+            // icon='labeled'
             onHide={() => setVisible(false)}
             vertical
             visible={visible}
-            width='thin'
           >
             <SideMenu />
           </Sidebar>

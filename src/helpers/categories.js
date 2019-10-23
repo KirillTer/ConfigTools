@@ -2,7 +2,7 @@ export const categories = [
     {
         id: 1,
         shortName: 'Customer',
-        longName: 'Customer Service - Customer',
+        longName: 'Customer Service',
         icon: 'headphones',
         items: [
             {
@@ -252,6 +252,7 @@ export const categories = [
         items: [
             {
                 id: 51,
+                category: 'Revenue',
                 elem: [
                     {
                         id: 510,

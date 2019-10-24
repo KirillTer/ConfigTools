@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect'
 
+
 const stateMainSelector = state => state.curriedMainReducer;
 export const getMainSelector = createSelector(stateMainSelector, state => state.main);
 

@@ -42,7 +42,7 @@ const SideMenu = () => {
             </Accordion.Title>
         {categories.map((item) => {
             return (
-                <>
+                <div key={item.id}>
                     <Accordion.Title
                     active={activeItemIndex === item.id}
                     index={item.id}
@@ -86,7 +86,7 @@ const SideMenu = () => {
                             </Accordion.Content>
                             </div>
                             :
-                            <div>
+                            <div key={category.id}>
                             {category.elem.map((el) => {
                                 return (
                                     <div key={el.id}>
@@ -106,7 +106,7 @@ const SideMenu = () => {
                         )})
                     }
                     </Accordion.Content>
-                </>            
+                </div>            
             )
         })}
     </Accordion>

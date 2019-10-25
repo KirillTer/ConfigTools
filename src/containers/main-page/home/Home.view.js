@@ -10,7 +10,6 @@ const ExercisesView = () => {
 
   const handleClick = (e, titleProps) => {
     const { index } = titleProps;
-    // const { activeIndex } = this.state;
     const newIndex = activeIndex;
 
     const currentIndexPosition = activeIndex.indexOf(index);

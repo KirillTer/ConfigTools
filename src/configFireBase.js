@@ -1,7 +1,4 @@
-import * as firebase from 'firebase/app';
-import 'firebase/auth';
-import 'firebase/database';
-import 'firebase/storage';
+import * as firebase from 'firebase';
 
 export const appName = "pacs-backend"
 // Your web app's Firebase configuration

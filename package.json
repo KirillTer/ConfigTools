@@ -4,6 +4,9 @@
   "private": true,
   "dependencies": {
     "connected-react-router": "^6.5.2",
+    "faker": "^4.1.0",
+    "lodash": "^4.17.15",
+    "node-gyp": "^6.0.0",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-redux": "^7.1.1",

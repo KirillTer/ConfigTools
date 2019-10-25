@@ -1,5 +1,5 @@
 import request from 'superagent'
-// import * as firebase from 'firebase/app';
+// import * as firebase from 'firebase';
 
 export const fetchMainApi = async () => {
     const {body} = await request.get(

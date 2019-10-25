@@ -6,14 +6,22 @@ import { categories } from '../../../helpers/categories'
 
 const ExercisesView = () => {
 
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [ activeIndex, setActiveIndex] = useState([])
 
   const handleClick = (e, titleProps) => {
-    const { index } = titleProps
-    const newIndex = activeIndex === index ? -1 : index
+    const { index } = titleProps;
+    // const { activeIndex } = this.state;
+    const newIndex = activeIndex;
 
-    setActiveIndex(newIndex )
-  }
+    const currentIndexPosition = activeIndex.indexOf(index);
+    if (currentIndexPosition > -1) {
+      newIndex.splice(currentIndexPosition, 1);
+    } else {
+      newIndex.push(index);
+    }
+      console.log('Handle - ', activeIndex, newIndex)
+    setActiveIndex([...newIndex]);
+  };
 
   return (
     <Grid centered style={{ minHeight: 'calc(100vh - 5rem)',
@@ -72,7 +80,7 @@ const ExercisesView = () => {
               return (
                 <div key={category.id}>
                   <Accordion.Title
-                    active={activeIndex === category.id}
+                    active={activeIndex.includes(category.id)}
                     index={category.id}
                     onClick={handleClick}
                   >
@@ -80,7 +88,8 @@ const ExercisesView = () => {
                     <Icon size='large' style={{ verticalAlign: 'baseline', margin: '1rem 0.5rem' }} name={category.icon} />
                     <span style={{ fontSize: '1.7rem', fontWeight: 'bold' }}>{category.longName}</span>
                   </Accordion.Title>
-                  <Accordion.Content active={activeIndex === category.id}>
+                  <Accordion.Content active={activeIndex.includes(category.id)}>
+                  {console.log('From accord - ', activeIndex, category.id)}
                   {category.items.map((item) => {
                     return (
                       <div key={item.id}>

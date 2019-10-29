@@ -1,8 +1,12 @@
 import React from 'react';
-// import { Link as RouterLink } from "react-router-dom";
+import { withRouter } from "react-router-dom";
+import { categories } from '../../../helpers/categories'
 import { Header, Button, Icon, Search, Label,Dropdown } from "semantic-ui-react";
 
-const TopHeader = ({loginStatus, singOutAction, onDisplay}) => {
+const TopHeader = withRouter(({loginStatus, singOutAction, onDisplay, location}) => {
+
+    const pathName = location.pathname.substring(location.pathname.lastIndexOf('/') + 1);
+    const pageName = categories.find(obj => obj.shortName === pathName)
 
     const trigger = (
         <span>
@@ -43,7 +47,7 @@ const TopHeader = ({loginStatus, singOutAction, onDisplay}) => {
                 <Icon name='bars' inverted style={{ paddingTop: '0.1rem'}}/>
             </Button>
             <Header as='h2' floated='left' style={{ color: 'white', margin: '1rem 0 0 0' }}>
-                Organization name
+                {pageName ? pageName.longName : 'Home'}
             </Header>
             </div>
             <div>
@@ -70,6 +74,6 @@ const TopHeader = ({loginStatus, singOutAction, onDisplay}) => {
             </div>
         </Header>
     )
-}
+})
 
 export default TopHeader

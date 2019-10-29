@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 
-import TransactionView from "./Transaction.view";
+import SummaryView from "./Summary.view";
 
 
 const mapStateToProps = (state) => {
@@ -11,4 +11,4 @@ const mapDispatchToProps = () => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TransactionView);
+export default connect(mapStateToProps, mapDispatchToProps)(SummaryView);

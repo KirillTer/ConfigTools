@@ -5,30 +5,35 @@ import { categories } from '../../helpers/categories'
 
 const SideMenu = () => {
 
-    const [activeItemIndex, setActiveItemIndex] = useState(0);
-    const [activeCategoryIndex, setActiveCategoryIndex] = useState(0);
-    const [activeElementIndex, setActiveElementIndex] = useState(0);
+    const [activeItemIndex, setActiveItemIndex] = useState([]);
+    const [activeCategoryIndex, setActiveCategoryIndex] = useState([]);
 
     const handleItemClick = (e, titleProps) => {
-        const { index } = titleProps
-        const newIndex = activeItemIndex === index ? -1 : index
-        setActiveItemIndex(newIndex )
+        const { index } = titleProps;
+        const newIndex = activeItemIndex;
+        const currentIndexPosition = activeItemIndex.indexOf(index);
+        if (currentIndexPosition > -1) {
+          newIndex.splice(currentIndexPosition, 1);
+        } else {
+          newIndex.push(index);
+        }
+        setActiveItemIndex([...newIndex]);
     }
 
     const handleCategoryClick = (e, titleProps) => {
-        const { index } = titleProps
-        const newIndex = activeCategoryIndex === index ? -1 : index
-        setActiveCategoryIndex(newIndex )
-    }
-
-    const handleElementClick = (e, titleProps) => {
-        const { index } = titleProps
-        const newIndex = activeElementIndex === index ? -1 : index
-        setActiveElementIndex(newIndex )
+        const { index } = titleProps;
+        const newIndex = activeCategoryIndex;
+        const currentIndexPosition = activeCategoryIndex.indexOf(index);
+        if (currentIndexPosition > -1) {
+          newIndex.splice(currentIndexPosition, 1);
+        } else {
+          newIndex.push(index);
+        }
+        setActiveCategoryIndex([...newIndex]);
     }
 
     return (
-        <Accordion>
+        <Accordion style={{marginBottom: '2rem'}}>
             <Accordion.Title
             active={activeItemIndex === 0}
             index={0}
@@ -44,7 +49,7 @@ const SideMenu = () => {
             return (
                 <div key={item.id}>
                     <Accordion.Title
-                    active={activeItemIndex === item.id}
+                    active={activeItemIndex.includes(item.id)}
                     index={item.id}
                     onClick={handleItemClick}
                     style={{padding: 0}}
@@ -54,12 +59,12 @@ const SideMenu = () => {
                         <span style={{ fontSize: '1rem', fontWeight: 'bold' }}>{item.longName}</span>
                     </Menu.Item>
                     </Accordion.Title>
-                    <Accordion.Content active={activeItemIndex === item.id} style={{padding: 0}}>
+                    <Accordion.Content active={activeItemIndex.includes(item.id)} style={{padding: 0}}>
                     {item.items.map((category) => {
                         return ( category.category ?
                             <div key={category.id}>
                             <Accordion.Title
-                                active={activeCategoryIndex === category.id}
+                                active={activeCategoryIndex.includes(category.id)}
                                 index={category.id}
                                 onClick={handleCategoryClick}
                                 style={{margin: '0.5rem 0 0.5rem 4rem', padding: 0}}
@@ -67,14 +72,13 @@ const SideMenu = () => {
                                 <Icon name='dropdown' />
                                 <span>{category.category}</span>
                             </Accordion.Title>
-                            <Accordion.Content active={activeCategoryIndex === category.id} style={{margin: '0 0 0 0', padding: 0}}>
+                            <Accordion.Content active={activeCategoryIndex.includes(category.id)} style={{margin: '0 0 0 0', padding: 0}}>
                                 {category.elem.map((el) => {
                                     return (
                                         <div key={el.id}>
                                         <Accordion.Title
-                                            active={activeElementIndex === el.id}
                                             index={el.id}
-                                            onClick={handleElementClick}
+                                            as={Link} to={`/main/${el.name}`}
                                             style={{margin: '0.5rem 0 0.5rem 5rem', padding: 0}}
                                         >
                                             <Icon name={el.icon} />
@@ -91,9 +95,8 @@ const SideMenu = () => {
                                 return (
                                     <div key={el.id}>
                                     <Accordion.Title
-                                        active={activeElementIndex === el.id}
                                         index={el.id}
-                                        onClick={handleElementClick}
+                                        as={Link} to={`/main/${el.name}`}
                                         style={{margin: '0.5rem 0 0.5rem 5rem', padding: 0}}
                                     >
                                         <Icon name={el.icon} />

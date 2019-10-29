@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import { Grid, Menu, Segment, Sidebar } from 'semantic-ui-react'
 
-import TopHeader from "./Header/TopHeader.connect";
+import TopHeader from "./header/TopHeader.connect";
 import SideMenu from "./Menu";
 // import Footer from "./Footer";
-import NotFound from "../../components/NotFound";
 import MainView from "../main-page/Main.connect";
 
 const Layout = ({match}) => {
@@ -27,7 +26,6 @@ const Layout = ({match}) => {
           <Sidebar
             as={Menu}
             animation='push'
-            // icon='labeled'
             onHide={() => setVisible(false)}
             vertical
             visible={visible}
@@ -39,7 +37,6 @@ const Layout = ({match}) => {
             <Segment basic>
               <Switch>
                 <Route path={match.path} component={MainView} />
-                <Route component={NotFound} />
               </Switch>
             </Segment>
           </Sidebar.Pusher>

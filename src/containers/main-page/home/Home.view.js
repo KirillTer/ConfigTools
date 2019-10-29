@@ -11,14 +11,12 @@ const ExercisesView = () => {
   const handleClick = (e, titleProps) => {
     const { index } = titleProps;
     const newIndex = activeIndex;
-
     const currentIndexPosition = activeIndex.indexOf(index);
     if (currentIndexPosition > -1) {
       newIndex.splice(currentIndexPosition, 1);
     } else {
       newIndex.push(index);
     }
-      console.log('Handle - ', activeIndex, newIndex)
     setActiveIndex([...newIndex]);
   };
 
@@ -88,7 +86,6 @@ const ExercisesView = () => {
                     <span style={{ fontSize: '1.7rem', fontWeight: 'bold' }}>{category.longName}</span>
                   </Accordion.Title>
                   <Accordion.Content active={activeIndex.includes(category.id)}>
-                  {console.log('From accord - ', activeIndex, category.id)}
                   {category.items.map((item) => {
                     return (
                       <div key={item.id}>

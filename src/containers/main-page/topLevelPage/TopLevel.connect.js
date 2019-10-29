@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 
-import MarketingView from "./Marketing.view";
+import TopLevelView from "./TopLevel.view";
 
 
 const mapStateToProps = (state) => {
@@ -11,4 +11,4 @@ const mapDispatchToProps = () => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MarketingView);
+export default connect(mapStateToProps, mapDispatchToProps)(TopLevelView);

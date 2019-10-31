@@ -47,7 +47,7 @@ const TopHeader = withRouter(({loginStatus, singOutAction, onDisplay, location})
                 <Icon name='bars' inverted style={{ paddingTop: '0.1rem'}}/>
             </Button>
             <Header as='h2' floated='left' style={{ color: 'white', margin: '1rem 0 0 0' }}>
-                {pageName ? pageName.longName : 'Home'}
+                {pageName ? pageName.longName : pathName}
             </Header>
             </div>
             <div>

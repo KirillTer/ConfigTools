@@ -40,7 +40,7 @@ const SideMenu = () => {
             onClick={handleItemClick}
             style={{ marginTop: '1rem', padding: 0}}
             >
-                <Menu.Item as={Link} to='/main/home'>
+                <Menu.Item as={Link} to='/main/Home'>
                     <Icon name='home' style={{float: 'left', margin: '0 1rem 0 2rem'}}/>
                     Home
                 </Menu.Item>

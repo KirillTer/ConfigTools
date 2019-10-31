@@ -1,12 +1,14 @@
 import React, { useState } from "react";
+import { withRouter } from "react-router-dom";
 import { Grid, Search, Header, Accordion, Icon } from 'semantic-ui-react'
 import { categories } from '../../../helpers/categories'
 
 // const Components = [Jackpot, Games, Channels, Code];
 
-const ExercisesView = () => {
+const ExercisesView = withRouter(({history, shortcut, updateHistoryAction, addShortcutAction, location}) => {
 
   const [ activeIndex, setActiveIndex] = useState([])
+  const pathName = location.pathname.substring(location.pathname.lastIndexOf('/') + 1);
 
   const handleClick = (e, titleProps) => {
     const { index } = titleProps;
@@ -19,6 +21,10 @@ const ExercisesView = () => {
     }
     setActiveIndex([...newIndex]);
   };
+
+  const handleAddShortcut = () => {
+    addShortcutAction(pathName);
+  }
 
   return (
     <Grid centered style={{ minHeight: 'calc(100vh - 5rem)',
@@ -62,7 +68,7 @@ const ExercisesView = () => {
                 backgroundColor: 'white',
                 fontSize: 10,
                 textTransform: 'uppercase' }}>
-            <Icon size='huge' name='plus' style={{ display: 'block', margin: 0 }}/>
+            <Icon size='huge' name='plus' style={{ display: 'block', margin: 0 }} onClick={handleAddShortcut}/>
           </div>
         </Grid.Column>
         <Grid.Column style={{ margin: '0 4rem' }}></Grid.Column>
@@ -122,6 +128,6 @@ const ExercisesView = () => {
       </Grid.Row>
     </Grid>
   );
-};
+})
 
 export default ExercisesView;

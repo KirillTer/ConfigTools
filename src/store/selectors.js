@@ -7,3 +7,7 @@ const stateAuthSelector = state => state.curriedAuthReducer;
 export const getUserSelector = createSelector(stateAuthSelector, state => state.user);
 export const getLoginSelector = createSelector(stateAuthSelector, state => state.logined);
 export const getLoginErrorSelector = createSelector(stateAuthSelector, state => state.error);
+
+const stateShortcutSelector = state => state.curriedShortcutReducer;
+export const getHistorySelector = createSelector(stateShortcutSelector, state => state.history);
+export const getShortcutSelector = createSelector(stateShortcutSelector, state => state.shortcut);

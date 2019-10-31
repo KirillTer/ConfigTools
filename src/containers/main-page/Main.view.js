@@ -17,7 +17,7 @@ const MainView = ({mainData, loadMain, match}) => {
     <>
     {console.log('Main selector - ', mainData)}
     <Switch>
-      <ProtectedRouter path={match.path + "/home"} component={Home} />
+      <ProtectedRouter path={match.path + "/Home"} component={Home} />
       <ProtectedRouter path={match.path + "/customer"} component={TopLevel} />
       <ProtectedRouter path={match.path + "/marketing"} component={TopLevel} />
       <ProtectedRouter path={match.path + "/promotions"} component={TopLevel} />

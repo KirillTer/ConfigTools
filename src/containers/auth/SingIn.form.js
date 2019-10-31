@@ -48,7 +48,7 @@ const SingInView = ({
               Login
             </Button>
             <Checkbox label='Remember me' style={{ marginTop: '1rem', marginRight: 0,  display: 'block', maxWidth: 150, textAlign: 'left' }}/>
-            <NavLink to={"/main/home"} style={{ display: 'block', textAlign: 'right', top: -19, left: 190, position: 'relative', maxWidth: 150 }}>Forget password?</NavLink>
+            <NavLink to={"/main/Home"} style={{ display: 'block', textAlign: 'right', top: -19, left: 190, position: 'relative', maxWidth: 150 }}>Forget password?</NavLink>
             {errorLogin && <Message
               error
               content={errorLogin}

@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 
-import GamesView from "./Games.view";
+import AssignPrivilegeView from "./AssignPrivilege.view";
 
 
 const mapStateToProps = (state) => {
@@ -11,4 +11,4 @@ const mapDispatchToProps = () => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(GamesView);
+export default connect(mapStateToProps, mapDispatchToProps)(AssignPrivilegeView);

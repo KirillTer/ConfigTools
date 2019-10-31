@@ -25,7 +25,7 @@ function* callSingIn(action) {
         } else {
             yield put({ type: SINGIN_SUCCESS, payload: userResult });
             localStorage.setItem("token", userResult.l);
-            history.push('/main/home')
+            history.push('/main/Home')
         }
     } catch(error) {
         console.log('SAGA after API SingIN ERROR - ', error.message)
@@ -42,7 +42,7 @@ function* callSingUp(action) {
         } else {
             yield put({ type: SINGUP_SUCCESS, payload: userResult });
             localStorage.setItem("token", userResult.l);
-            history.push('/main/home')
+            history.push('/main/Home')
         }
     } catch(error) {
         yield put({ type: SINGUP_FAILURE, payload: error });

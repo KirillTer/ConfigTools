@@ -5,8 +5,8 @@ import UnAuthorized from './UnAuthorized'
 const ProtectedRoute = props => {
 
     const {component: ProtectedComponent, ...rest} = props
-    const renderProtected = (routeProps) => (localStorage.getItem('token') ? <ProtectedComponent {...routeProps}/> : <UnAuthorized />)
-
+    // const renderProtected = (routeProps) => (localStorage.getItem('token') ? <ProtectedComponent {...routeProps}/> : <UnAuthorized />)
+    const renderProtected = (routeProps) => (true) ? <ProtectedComponent {...routeProps}/> : <UnAuthorized />
     return <Route {...rest} render={renderProtected}/>
 }
 

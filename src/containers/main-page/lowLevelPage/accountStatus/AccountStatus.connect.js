@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 
-import ChannelsView from "./Channels.view";
+import AccountStatusView from "./AccountStatus.view";
 
 
 const mapStateToProps = (state) => {
@@ -11,4 +11,4 @@ const mapDispatchToProps = () => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChannelsView);
+export default connect(mapStateToProps, mapDispatchToProps)(AccountStatusView);

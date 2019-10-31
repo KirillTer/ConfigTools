@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 
-import CodeView from "./Code.view";
+import SummaryView from "./Summary.view";
 
 
 const mapStateToProps = (state) => {
@@ -11,4 +11,4 @@ const mapDispatchToProps = () => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CodeView);
+export default connect(mapStateToProps, mapDispatchToProps)(SummaryView);

@@ -1,5 +1,5 @@
 import request from 'superagent'
-import * as firebase from 'firebase/app';
+// import * as firebase from 'firebase';
 
 export const fetchMainApi = async () => {
     const {body} = await request.get(
@@ -11,32 +11,32 @@ export const fetchMainApi = async () => {
 
 export const singInApi = ({email, password}) => {
   console.log('Start Sign IN API - ', email, password)
-  const userResult = firebase
-  .auth()
-  .signInWithEmailAndPassword(email, password)
-  .then(user => {
-    console.log('Auth SingIn user email - ', user.user.email);
-    return user.user;
-  })
-  .catch(error => {
-    console.error(error);
-    return error
-  });
-  return userResult;
+  // const userResult = firebase
+  // .auth()
+  // .signInWithEmailAndPassword(email, password)
+  // .then(user => {
+  //   console.log('Auth SingIn user email - ', user.user.email);
+  //   return user.user;
+  // })
+  // .catch(error => {
+  //   console.error(error);
+  //   return error
+  // });
+  // return userResult;
 }
 
 export const singUpApi = ({email, password}) => {
   console.log('Start Sign UP API - ', email, password)
-  const userResult = firebase
-  .auth()
-  .createUserWithEmailAndPassword(email, password)
-  .then(user => {
-    console.log('Auth SingUP user email - ', user.user.email)
-    return user.user;
-  })
-  .catch(error => {
-    console.error(error);
-    return error
-  });
-  return userResult;
+  // const userResult = firebase
+  // .auth()
+  // .createUserWithEmailAndPassword(email, password)
+  // .then(user => {
+  //   console.log('Auth SingUP user email - ', user.user.email)
+  //   return user.user;
+  // })
+  // .catch(error => {
+  //   console.error(error);
+  //   return error
+  // });
+  // return userResult;
 }

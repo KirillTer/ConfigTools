@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
 
-import ExercisesView from "./Home.view";
+import AccessLevelsView from "./AccessLevels.view";
 
 
 const mapStateToProps = (state) => {
@@ -11,4 +11,4 @@ const mapDispatchToProps = () => {
   return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ExercisesView);
+export default connect(mapStateToProps, mapDispatchToProps)(AccessLevelsView);

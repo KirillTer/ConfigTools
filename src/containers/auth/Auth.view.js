@@ -3,6 +3,7 @@ import { Route, Switch, NavLink } from "react-router-dom";
 
 import SingIn from './SingIn.form'
 import SingUp from './SingUp.form'
+import NotFound from "../../components/NotFound";
 
 const AuthView = ({user, match, singInAction, singUpAction, error}) => {
 
@@ -25,6 +26,7 @@ const AuthView = ({user, match, singInAction, singUpAction, error}) => {
       <Switch>
         <Route path={match.path + "/singin"} render={() => (<SingIn onSubmit={handleSingIn} errorLogin={error}/>)}/>
         <Route path={match.path + "/singup"} render={() => (<SingUp onSubmit={handleSingUp}/>)}/>
+        <Route component={NotFound} />
       </Switch>
     </>
   );

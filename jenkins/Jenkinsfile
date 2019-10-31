@@ -1,0 +1,79 @@
+#!groovy
+pipeline{
+    agent any
+    parameters {
+        string(defaultValue: 'master', description: 'GIT Branch name', name: 'GIT_BRANCH')
+		string(defaultValue: 'https://ta_ukit_stash@git.bingo.ptec/scm/feb/back-office-system.git', description: 'GIT Project Repo', name: 'GIT_REPO')
+		string(defaultValue: '19.5.0', description: 'Release version number', name: 'RELEASE_VERSION')
+    }
+	stages {
+		stage('Preparation') {
+			steps {
+					checkout([$class: 'GitSCM',
+						branches: [[name: "*/${GIT_BRANCH}"]],
+						extensions: [[$class: 'CleanCheckout'],[$class: 'CloneOption', timeout: 20]],
+						userRemoteConfigs: [[credentialsId: 'SVCBitbucketService',url: "${GIT_REPO}"]]
+					])
+
+					/** Tag Git at start of build **/
+					withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'SVCBitbucketService', usernameVariable: 'GIT_USERNAME', passwordVariable: 'GIT_PASSWORD']]) {
+						sh 'echo ${GIT_USERNAME} pushing '
+						sh '/usr/local/git/libexec/git-core/git config --global user.email "${GIT_USERNAME}"'
+						sh '/usr/local/git/libexec/git-core/git config --global user.name "Jenkins"'
+						sh '/usr/local/git/libexec/git-core/git tag -a v' + getProperty('RELEASE_VERSION') +'-'+ getProperty('BUILD_NUMBER') + ' -m "#0 Build ' + getProperty('RELEASE_VERSION') +'-'+ getProperty('BUILD_NUMBER') + '"'
+						sh '/usr/local/git/libexec/git-core/git push https://ta_ukit_stash:${GIT_PASSWORD}@git.bingo.ptec/scm/feb/back-office-system.git HEAD:${GIT_BRANCH} --tags'
+					}
+
+					/** Create annotated tag in git **/
+					nodejs(nodeJSInstallationName: 'v11.10.1') {
+						sh 'npm install --prefer-offline --progress false --loglevel warn'
+					}
+			}
+
+		}
+
+		stage('Build') {
+		    steps {
+    			nodejs(nodeJSInstallationName: 'v11.10.1') {
+    					sh 'npm run build'
+    			}
+		    }
+		}
+
+		stage('Package') {
+		    steps {
+    			nodejs(nodeJSInstallationName: 'v11.10.1') {
+    					sh 'npm run package -- --releaseversion=' + getProperty('RELEASE_VERSION') + ' --buildversion=' + getProperty('BUILD_NUMBER')
+    			}
+		    }
+
+		}
+
+		stage('Deploy') {
+			steps {
+				rtUpload (
+					serverId: "-283547227@1458215185321",
+					specPath: 'jenkins/uploadSpec.json'
+				)
+				script {
+					currentBuild.result = 'SUCCESS'
+				}
+			}
+
+		}
+
+	}
+	/*post {
+			failure {
+				script {
+					currentBuild.result = 'FAILURE'
+				}
+			}
+			always {
+			  step([$class: 'Mailer',
+				notifyEveryUnstableBuild: true,
+				recipients: "bingo.frontenddevelopers@playtech.com",
+				sendToIndividuals: true])
+			}
+	}*/
+}

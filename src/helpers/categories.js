@@ -37,17 +37,17 @@ export const categories = [
                     {
                         id: 116,
                         icon: 'star',
-                        name: 'Bet History '
+                        name: 'Bet History'
                     },
                     {
                         id: 117,
                         icon: 'star',
-                        name: 'Promotions '
+                        name: 'Promotions'
                     },
                     {
                         id: 118,
                         icon: 'star',
-                        name: 'Bonuses '
+                        name: 'Bonuses'
                     },
                     {
                         id: 119,
@@ -82,7 +82,7 @@ export const categories = [
                     {
                         id: 125,
                         icon: 'star',
-                        name: 'Statement '
+                        name: 'Statement'
                     },
                     {
                         id: 126,
@@ -205,7 +205,7 @@ export const categories = [
     },
     {
         id: 3,
-        shortName: 'Promotions',
+        shortName: 'Promotion',
         longName: 'Promotion Management',
         icon: 'star outline',
         items: [

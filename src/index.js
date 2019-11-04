@@ -17,7 +17,7 @@ ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <Switch>
-        <Route exact path="/" render={() => (<Redirect to="/auth"/>)}/>
+        <Route exact path="/" render={() => (<Redirect to="/main/home/"/>)}/>
         <Route path="/main" component={Layout} />
         <Route path="/auth" component={AuthView} />
       </Switch>

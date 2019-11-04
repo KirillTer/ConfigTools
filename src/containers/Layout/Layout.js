@@ -12,7 +12,6 @@ const Layout = ({match}) => {
   const [visible, setVisible] = useState(false);
 
   const handleDisplay = () => {
-    console.log('Header clicked - ', !visible);
     setVisible(!visible)
   }
 

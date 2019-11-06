@@ -26,15 +26,13 @@ import ChatStatus from "./lowLevelPage/chatStatus/ChatStatus.connect";
 import StuckGames from "./lowLevelPage/stuckGames/StuckGames.connect";
 import IMSGameplay from "./lowLevelPage/iMSGameplay/IMSGameplay.connect";
 
-const MainView = ({mainData, loadMain, match}) => {
+const MainView = ({ mainData, loadMain, match }) => {
 
   useEffect(() => {
     loadMain();
   }, [loadMain]);
 
   return (
-    <>
-    {console.log('Main selector - ', mainData)}
     <Switch>
       <ProtectedRouter path={match.path + "/Home"} component={Home} />
       <ProtectedRouter path={match.path + "/customer"} component={TopLevel} />
@@ -67,7 +65,6 @@ const MainView = ({mainData, loadMain, match}) => {
 
       <Route component={NotFound} />
     </Switch>
-    </>
   );
 };
 

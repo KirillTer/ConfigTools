@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
-import { Grid, Search, Header, Accordion, Icon } from 'semantic-ui-react'
+import { Grid, Header, Accordion, Icon } from 'semantic-ui-react'
 import { categories } from '../../../helpers/categories'
+import Search from '../../Layout/Search'
 
 // const Components = [Jackpot, Games, Channels, Code];
 
@@ -35,14 +36,7 @@ const ExercisesView = withRouter(({ history, shortcut, updateHistoryAction, addS
       justifyContent: 'start'
     }}>
       <Header as='h4' style={{ width: '100vw', height: '5rem', marginTop: '5rem' }}>
-        <Search
-          category
-          loading={false}
-          size='tiny'
-          input={{ fluid: true }}
-          placeholder='Search Tools'
-          style={{ width: '74rem', margin: '0 auto' }}
-        />
+        <Search style={{ width: '17rem', margin: '0 auto' }} />
       </Header>
       <Grid.Row>
         <Grid.Column style={{ margin: '0 4rem' }}>

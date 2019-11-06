@@ -1,52 +1,82 @@
 import _ from 'lodash'
-import React, { useState } from 'react'
-import { Search, Grid, Label } from 'semantic-ui-react'
+import React, { Component } from 'react'
+import { history } from '../../store/configureStore'
+import { Search, Label } from 'semantic-ui-react'
 import { categories } from '../../helpers/categories'
 
-const source = categories.map(item => ({
-  title: item.title,
-  description: item.shortName
+const initialState = { isLoading: false, results: [], value: '' }
+
+const getResults = items => items.map(item => ({
+  title: item.name,
+  description: item.name
 }))
 
-const resultRenderer = ({ title }) => <Label content={title} />
+const source = categories.reduce((memo, item) => {
+  const name = item.title
+  memo[name] = {
+    name,
+    results: getResults((item.items.map(i => i.elem)).flat()),
+  }
+  return memo
+}, {})
 
-const SearchComponent = (props) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [results, setResults] = useState([]);
-  const [valueParam, setValue] = useState('');
+export default class SearchExampleCategory extends Component {
+  state = initialState
 
-  const handleResultSelect = (e, { results }) => {
-    console.log(results)
-    setResults(results.title)
+  handleResultSelect = (e, { result }) => {
+    console.log(result.description)
+    this.setState({ value: '' })
+    history.push(`/main/${result.description}`)
   }
 
-  const handleSearchChange = (e, { value }) => {
-    setIsLoading(true)
-    setValue(value)
+  resultRenderer = ({ title }) => <Label content={title} />
 
-    const re = new RegExp(_.escapeRegExp(value), 'i')
-    const isMatch = (result) => re.test(result.title)
-    setIsLoading(false)
-    setResults(_.filter(source, isMatch))
+  handleSearchChange = (e, { value }) => {
+    this.setState({ isLoading: true, value })
+
+    setTimeout(() => {
+      if (this.state.value.length < 1) return this.setState(initialState)
+
+      const re = new RegExp(_.escapeRegExp(this.state.value), 'i')
+      const isMatch = (result) => re.test(result.title)
+
+      const filteredResults = _.reduce(
+        source,
+        (memo, data, name) => {
+          const results = _.filter(data.results, isMatch)
+          if (results.length) memo[name] = { name, results } // eslint-disable-line no-param-reassign
+
+          return memo
+        },
+        {},
+      )
+
+      this.setState({
+        isLoading: false,
+        results: filteredResults,
+      })
+    }, 300)
   }
 
-  return (
-    <Grid>
-      <Grid.Column>
-        <Search
-          loading={isLoading}
-          onResultSelect={handleResultSelect}
-          onSearchChange={_.debounce(handleSearchChange, 500, {
-            leading: true,
-          })}
-          results={results}
-          value={valueParam}
-          resultRenderer={resultRenderer}
-          {...props}
-        />
-      </Grid.Column>
-    </Grid>
-  )
+  render() {
+    const { isLoading, value, results } = this.state
+
+    return (
+      <Search
+        category
+        loading={isLoading}
+        onResultSelect={this.handleResultSelect}
+        onSearchChange={_.debounce(this.handleSearchChange, 500, {
+          leading: true,
+        })}
+        results={results}
+        value={value}
+        resultRenderer={this.resultRenderer}
+        {...this.props}
+        placeholder='Search Tools'
+        aligned='right'
+        minCharacters={3}
+      />
+    )
+  }
 }
-
-export default SearchComponent

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
-import { Grid, Header, Accordion, Icon } from 'semantic-ui-react'
+import { Grid, Header, Accordion, Icon, Modal } from 'semantic-ui-react'
 import { categories } from '../../../helpers/categories'
 import Search from '../../Layout/Search'
 
@@ -9,6 +9,7 @@ import Search from '../../Layout/Search'
 const ExercisesView = withRouter(({ history, shortcut, updateHistoryAction, addShortcutAction, location }) => {
 
   const [activeIndex, setActiveIndex] = useState([])
+  const [modalData, setModalData] = useState('')
   const pathName = location.pathname.substring(location.pathname.lastIndexOf('/') + 1);
 
   const handleClick = (e, titleProps) => {
@@ -25,6 +26,15 @@ const ExercisesView = withRouter(({ history, shortcut, updateHistoryAction, addS
 
   const handleAddShortcut = () => {
     addShortcutAction(pathName);
+  }
+
+  const callbackFunction = (childData) => {
+    setModalData(childData)
+  }
+
+  const onApprove = () => {
+    console.log('MODAL!!!', modalData); // returns the button
+    addShortcutAction(modalData)
   }
 
   return (
@@ -68,7 +78,19 @@ const ExercisesView = withRouter(({ history, shortcut, updateHistoryAction, addS
             fontSize: 10,
             textTransform: 'uppercase'
           }}>
-            <Icon size='huge' name='plus' style={{ display: 'block', margin: 0 }} onClick={handleAddShortcut} />
+            {console.log('Shortcut from page - ', shortcut.page)}
+            <Modal
+              size='mini'
+              trigger={shortcut ? <div onClick={handleAddShortcut} >
+                <Icon size='big' name='plus' style={{ display: 'block', margin: '0.5rem auto' }} />
+                <p style={{ textAlign: 'center' }}>{shortcut.page}</p>
+              </div> :
+                <Icon size='huge' name='plus' style={{ display: 'block', margin: '0.5rem auto' }} />
+              }
+              header='Add tool shortcut'
+              content={<Search val='shortcut' parentCallback={callbackFunction} />}
+              actions={['Cancel', { key: 'done', content: 'Add', positive: true, onClick: onApprove }]}
+            />
           </div>
         </Grid.Column>
         <Grid.Column style={{ margin: '0 4rem' }}></Grid.Column>

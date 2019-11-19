@@ -1,6 +1,8 @@
-import {SINGIN_SUCCESS, SINGIN_FAILURE,
-        LOGOUT_SUCCESS, LOGOUT_FAILURE,
-        SINGUP_SUCCESS, SINGUP_FAILURE} from '../actionTypes'
+import {
+    LOGIN_SUCCESS, LOGIN_FAILURE,
+    LOGOUT_SUCCESS, LOGOUT_FAILURE,
+    SINGUP_SUCCESS, SINGUP_FAILURE
+} from '../actionTypes'
 
 const initialState = {
     user: {},
@@ -8,10 +10,10 @@ const initialState = {
     error: ''
 }
 
-export default (state = initialState, {type, payload}) => {
+export default (state = initialState, { type, payload }) => {
     switch (type) {
-        case SINGIN_SUCCESS:
-            console.log('SINGIN_SUCCESS', payload)
+        case LOGIN_SUCCESS:
+            console.log('LOGIN_SUCCESS', payload)
             state.error = '';
             state.user = payload;
             state.logined = true;
@@ -28,8 +30,8 @@ export default (state = initialState, {type, payload}) => {
             state.user = null;
             state.logined = false;
             return;
-        case SINGIN_FAILURE:
-            console.log('SINGIN_FAILURE', payload)
+        case LOGIN_FAILURE:
+            console.log('LOGIN_FAILURE', payload)
             state.error = payload;
             return;
         case SINGUP_FAILURE:

@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import { Grid, Header, Accordion, Icon, Modal } from 'semantic-ui-react'
 import { categories } from '../../../helpers/categories'
-import Search from '../../Layout/Search'
-
-// const Components = [Jackpot, Games, Channels, Code];
+import Search from '../../layout/Search'
 
 const ExercisesView = withRouter(({ history, shortcut, updateHistoryAction, addShortcutAction, location }) => {
 

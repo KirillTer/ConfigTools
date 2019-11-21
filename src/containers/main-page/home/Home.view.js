@@ -76,7 +76,7 @@ const ExercisesView = withRouter(({ history, shortcut, updateHistoryAction, addS
             fontSize: 10,
             textTransform: 'uppercase'
           }}>
-            {console.log('Shortcut from page - ', shortcut.page)}
+            {/* {console.log('Shortcut from page - ', shortcut.page)} */}
             <Modal
               size='mini'
               trigger={shortcut ? <div onClick={handleAddShortcut} >

@@ -54,7 +54,7 @@ const SideMenu = () => {
                             onClick={handleItemClick}
                             style={{ padding: 0 }}
                         >
-                            <Menu.Item as={Link} to={`/main/${item.shortName}`} key={item.id}>
+                            <Menu.Item as={Link} to={`/main/${item.shortName}`}>
                                 <Icon name={item.icon} style={{ float: 'left', margin: '0 1rem 0 2rem' }} />
                                 <span style={{ fontSize: '1rem', fontWeight: 'bold' }}>{item.title}</span>
                             </Menu.Item>

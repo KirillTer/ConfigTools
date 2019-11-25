@@ -9,5 +9,8 @@ export const getLoginSelector = createSelector(stateAuthSelector, state => state
 export const getLoginErrorSelector = createSelector(stateAuthSelector, state => state.error);
 
 const stateShortcutSelector = state => state.curriedShortcutReducer;
-export const getHistorySelector = createSelector(stateShortcutSelector, state => state.history);
-export const getShortcutSelector = createSelector(stateShortcutSelector, state => state.shortcut);
+export const getHistorySelector = createSelector(stateShortcutSelector, state => state.historyState);
+export const getShortcutSelector1 = createSelector(stateShortcutSelector, state => state.shortcut1);
+export const getShortcutSelector2 = createSelector(stateShortcutSelector, state => state.shortcut2);
+export const getShortcutSelector3 = createSelector(stateShortcutSelector, state => state.shortcut3);
+export const getShortcutSelector4 = createSelector(stateShortcutSelector, state => state.shortcut4);

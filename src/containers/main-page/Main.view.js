@@ -26,11 +26,17 @@ import ChatStatus from "./lowLevelPage/chatStatus/ChatStatus.connect";
 import StuckGames from "./lowLevelPage/stuckGames/StuckGames.connect";
 import IMSGameplay from "./lowLevelPage/iMSGameplay/IMSGameplay.connect";
 
-const MainView = ({ mainData, loadMain, match }) => {
+const MainView = ({ location, match, loadMain, updateHistoryAction }) => {
 
   useEffect(() => {
     loadMain();
   }, [loadMain]);
+
+  useEffect(() => {
+    if (location.pathname !== "/main/Home") {
+      updateHistoryAction(location.pathname.substring(location.pathname.lastIndexOf('/') + 1));
+    }
+  });
 
   return (
     <Switch>

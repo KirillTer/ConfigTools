@@ -78,6 +78,7 @@ export default class SearchExampleCategory extends Component {
         value={value}
         resultRenderer={this.resultRenderer}
         placeholder='Search Tools'
+        input={{ fluid: true }}
         aligned='right'
         minCharacters={3}
       />

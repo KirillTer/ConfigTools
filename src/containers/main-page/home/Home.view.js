@@ -50,15 +50,16 @@ const ExercisesView = withRouter(({ historyPath, shortcut1, shortcut2, shortcut3
       backgroundColor: '#F7F7F7',
       display: 'flex',
       flexDirection: 'column',
-      justifyContent: 'start'
+      justifyContent: 'start',
+      alignItems: 'center',
     }}>
       <Header as='h4' style={{ width: '100vw', height: '5rem', marginTop: '5rem', display: 'flex', justifyContent: 'center' }}>
-        <div style={{ width: '17rem' }}>
+        <div style={{ width: '70rem' }}>
           <SearchComponent />
         </div>
       </Header>
-      <Grid.Row>
-        <Grid.Column style={{ margin: '0 4rem' }}>
+      <div style={{ width: '72rem', display: 'flex', justifyContent: 'space-between', padding: '0', marginBottom: '4rem' }}>
+        <Grid.Column>
           <div style={{
             width: '7rem',
             height: '7rem',
@@ -76,17 +77,19 @@ const ExercisesView = withRouter(({ historyPath, shortcut1, shortcut2, shortcut3
                 item.items.forEach(el => {
                   if (_.find(el.elem, ['name', historyPath.page])) {
                     historyPath['icon'] = _.find(el.elem, ['name', historyPath.page]).icon
+                    historyPath['category'] = item.title
                   } else {
                     return
                   }
                 })
               })}
               <Icon size='big' name={historyPath.icon} style={{ display: 'block', margin: '0.5rem auto' }} />
-              <p style={{ textAlign: 'center' }}>{historyPath.page}</p>
-            </NavLink> : null}
+              <p style={{ textAlign: 'center' }}>{historyPath.icon ? historyPath.page : null}</p>
+              <span style={{ textTransform: 'none', marginLeft: '-2rem', fontSize: '1rem', display: 'block', position: 'absolute', top: '20rem', width: '9rem' }}>{historyPath.category}</span>
+            </NavLink> : <Grid.Column />}
           </div>
         </Grid.Column>
-        <Grid.Column style={{ margin: '0 4rem' }}>
+        <Grid.Column>
           <div style={{
             width: '7rem',
             height: '7rem',
@@ -103,24 +106,29 @@ const ExercisesView = withRouter(({ historyPath, shortcut1, shortcut2, shortcut3
               item.items.forEach(el => {
                 if (_.find(el.elem, ['name', shortcut1.page])) {
                   shortcut1['icon'] = _.find(el.elem, ['name', shortcut1.page]).icon
+                  shortcut1['category'] = item.title
                 } else {
                   return
                 }
               })
             })}
-            <Icon size='big' name={shortcut1.icon} style={{ display: 'block', margin: '0.5rem auto' }} />
+            <Icon size='big' name={shortcut1.icon} style={{ display: 'block', margin: '0.5rem auto', position: 'relative' }} />
             <p style={{ textAlign: 'center' }}>{shortcut1.page}</p>
+            <span style={{ textTransform: 'none', marginLeft: '-2rem', fontSize: '1rem', display: 'block', position: 'absolute', top: '20rem', width: '9rem' }}>{shortcut1.category}</span>
           </NavLink> :
             <Modal
               size='mini'
-              trigger={<Icon size='huge' name='plus' style={{ display: 'block', margin: '1rem auto' }} />}
+              trigger={<div>
+                <Icon size='huge' name='plus' style={{ display: 'block', margin: '1rem auto' }} />
+                <span style={{ textTransform: 'none', margin: '3.5rem 0 0 -0.5rem', fontSize: '1rem', display: 'block', whiteSpace: 'nowrap' }}>Add shortcut</span>
+              </div>}
               header='Add tool shortcut'
               content={<SearchComponent val='shortcut' parentCallback={callbackFunction} />}
               actions={['Cancel', { key: 'done', content: 'Add', positive: true, onClick: onApprove1 }]}
             />}
           </div>
         </Grid.Column>
-        {shortcut2 ? <Grid.Column style={{ margin: '0 4rem' }}>
+        {shortcut2 ? <Grid.Column>
           <div style={{
             width: '7rem',
             height: '7rem',
@@ -137,24 +145,29 @@ const ExercisesView = withRouter(({ historyPath, shortcut1, shortcut2, shortcut3
               item.items.forEach(el => {
                 if (_.find(el.elem, ['name', shortcut2.page])) {
                   shortcut2['icon'] = _.find(el.elem, ['name', shortcut2.page]).icon
+                  shortcut2['category'] = item.title
                 } else {
                   return
                 }
               })
             })}
-            <Icon size='big' name={shortcut2.icon} style={{ display: 'block', margin: '0.5rem auto' }} />
+            <Icon size='big' name={shortcut2.icon} style={{ display: 'block', margin: '0.5rem auto', position: 'relative' }} />
             <p style={{ textAlign: 'center' }}>{shortcut2.page}</p>
+            <span style={{ textTransform: 'none', marginLeft: '-2rem', fontSize: '1rem', display: 'block', position: 'absolute', top: '20rem', width: '9rem' }}>{shortcut2.category}</span>
           </NavLink> :
             <Modal
               size='mini'
-              trigger={<Icon size='huge' name='plus' style={{ display: 'block', margin: '1rem auto' }} />}
+              trigger={<div>
+                <Icon size='huge' name='plus' style={{ display: 'block', margin: '1rem auto' }} />
+                <span style={{ textTransform: 'none', margin: '3.5rem 0 0 -0.5rem', fontSize: '1rem', display: 'block', whiteSpace: 'nowrap' }}>Add shortcut</span>
+              </div>}
               header='Add tool shortcut'
               content={<SearchComponent val='shortcut' parentCallback={callbackFunction} />}
               actions={['Cancel', { key: 'done', content: 'Add', positive: true, onClick: onApprove2 }]}
             />}
           </div>
-        </Grid.Column> : <Grid.Column style={{ margin: '0 4rem' }} />}
-        {shortcut3 ? <Grid.Column style={{ margin: '0 4rem' }}>
+        </Grid.Column> : <Grid.Column><div style={{ width: '9rem' }}></div></Grid.Column>}
+        {shortcut3 ? <Grid.Column>
           <div style={{
             width: '7rem',
             height: '7rem',
@@ -171,24 +184,29 @@ const ExercisesView = withRouter(({ historyPath, shortcut1, shortcut2, shortcut3
               item.items.forEach(el => {
                 if (_.find(el.elem, ['name', shortcut3.page])) {
                   shortcut3['icon'] = _.find(el.elem, ['name', shortcut3.page]).icon
+                  shortcut3['category'] = item.title
                 } else {
                   return
                 }
               })
             })}
-            <Icon size='big' name={shortcut3.icon} style={{ display: 'block', margin: '0.5rem auto' }} />
+            <Icon size='big' name={shortcut3.icon} style={{ display: 'block', margin: '0.5rem auto', position: 'relative' }} />
             <p style={{ textAlign: 'center' }}>{shortcut3.page}</p>
+            <span style={{ textTransform: 'none', marginLeft: '-2rem', fontSize: '1rem', display: 'block', position: 'absolute', top: '20rem', width: '9rem' }}>{shortcut3.category}</span>
           </NavLink> :
             <Modal
               size='mini'
-              trigger={<Icon size='huge' name='plus' style={{ display: 'block', margin: '1rem auto' }} />}
+              trigger={<div>
+                <Icon size='huge' name='plus' style={{ display: 'block', margin: '1rem auto' }} />
+                <span style={{ textTransform: 'none', margin: '3.5rem 0 0 -0.5rem', fontSize: '1rem', display: 'block', whiteSpace: 'nowrap' }}>Add shortcut</span>
+              </div>}
               header='Add tool shortcut'
               content={<SearchComponent val='shortcut' parentCallback={callbackFunction} />}
               actions={['Cancel', { key: 'done', content: 'Add', positive: true, onClick: onApprove3 }]}
             />}
           </div>
-        </Grid.Column> : <Grid.Column style={{ margin: '0 4rem' }} />}
-        {shortcut4 ? <Grid.Column style={{ margin: '0 4rem' }}>
+        </Grid.Column> : <Grid.Column><div style={{ width: '9rem' }}></div></Grid.Column>}
+        {shortcut4 ? <Grid.Column>
           <div style={{
             width: '7rem',
             height: '7rem',
@@ -205,24 +223,29 @@ const ExercisesView = withRouter(({ historyPath, shortcut1, shortcut2, shortcut3
               item.items.forEach(el => {
                 if (_.find(el.elem, ['name', shortcut4.page])) {
                   shortcut4['icon'] = _.find(el.elem, ['name', shortcut4.page]).icon
+                  shortcut4['category'] = item.title
                 } else {
                   return
                 }
               })
             })}
-            <Icon size='big' name={shortcut4.icon} style={{ display: 'block', margin: '0.5rem auto' }} />
+            <Icon size='big' name={shortcut4.icon} style={{ display: 'block', margin: '0.5rem auto', position: 'relative' }} />
             <p style={{ textAlign: 'center' }}>{shortcut4.page}</p>
+            <span style={{ textTransform: 'none', marginLeft: '-2rem', fontSize: '1rem', display: 'block', position: 'absolute', top: '20rem', width: '9rem' }}>{shortcut4.category}</span>
           </NavLink> :
             <Modal
               size='mini'
-              trigger={<Icon size='huge' name='plus' style={{ display: 'block', margin: '1rem auto' }} />}
+              trigger={<div>
+                <Icon size='huge' name='plus' style={{ display: 'block', margin: '1rem auto' }} />
+                <span style={{ textTransform: 'none', margin: '3.5rem 0 0 -0.5rem', fontSize: '1rem', display: 'block', whiteSpace: 'nowrap' }}>Add shortcut</span>
+              </div>}
               header='Add tool shortcut'
               content={<SearchComponent val='shortcut' parentCallback={callbackFunction} />}
               actions={['Cancel', { key: 'done', content: 'Add', positive: true, onClick: onApprove4 }]}
             />}
           </div>
-        </Grid.Column> : <Grid.Column style={{ margin: '0 4rem' }} />}
-      </Grid.Row>
+        </Grid.Column> : <Grid.Column><div style={{ width: '9rem' }}></div></Grid.Column>}
+      </div>
 
       <Grid.Row>
         <Grid.Column width={10}>

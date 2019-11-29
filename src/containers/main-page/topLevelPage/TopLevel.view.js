@@ -5,7 +5,7 @@ import { categories } from '../../../helpers/categories'
 const TopLevelView = ({ location }) => {
 
   const pathName = location.pathname.substring(location.pathname.lastIndexOf('/') + 1);
-  const pageName = categories.find(obj => obj.shortName === pathName)
+  const pageName = categories.find(obj => obj.title === pathName)
 
   return (
     <Grid centered style={{

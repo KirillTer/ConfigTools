@@ -1,7 +1,6 @@
 export const categories = [
     {
         id: 1,
-        shortName: 'Customer',
         title: 'Customer Service',
         icon: 'headphones',
         items: [
@@ -172,7 +171,6 @@ export const categories = [
     },
     {
         id: 2,
-        shortName: 'Marketing',
         title: 'Marketing',
         icon: 'lightbulb outline',
         items: [
@@ -205,7 +203,6 @@ export const categories = [
     },
     {
         id: 3,
-        shortName: 'Promotion',
         title: 'Promotion Management',
         icon: 'star outline',
         items: [
@@ -228,7 +225,6 @@ export const categories = [
     },
     {
         id: 4,
-        shortName: 'Transaction',
         title: 'Transaction Data',
         icon: 'file alternate outline',
         items: [
@@ -246,7 +242,6 @@ export const categories = [
     },
     {
         id: 5,
-        shortName: 'Financial',
         title: 'Financial Data',
         icon: 'line graph',
         items: [
@@ -322,7 +317,6 @@ export const categories = [
     },
     {
         id: 6,
-        shortName: 'Game',
         title: 'Game Management',
         icon: 'game',
         items: [

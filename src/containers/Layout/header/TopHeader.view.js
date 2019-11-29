@@ -7,7 +7,7 @@ import SearchComponent from '../Search'
 const TopHeader = withRouter(({ loginStatus, singOutAction, onDisplay, location }) => {
 
     const pathName = location.pathname.substring(location.pathname.lastIndexOf('/') + 1);
-    const pageName = categories.find(obj => obj.shortName === pathName)
+    const pageName = categories.find(obj => obj.title === pathName)
 
     const trigger = (
         <span>
@@ -54,7 +54,7 @@ const TopHeader = withRouter(({ loginStatus, singOutAction, onDisplay, location 
                 </Header>
             </div>
             <div>
-                <div style={{ fontSize: '1rem', margin: '0 2rem 0 0', display: 'inline-block' }}>
+                <div style={{ fontSize: '1rem', margin: '0 2rem 0 0', display: 'inline-block', width: '18rem' }}>
                     <SearchComponent />
                 </div>
                 <div style={{ display: 'inline-block' }}>

@@ -7,7 +7,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
 import configureStore, { history } from "./store/configureStore";
 
-import Layout from "./containers/Layout/Layout";
+import Layout from "./containers/layout/Layout";
 import AuthView from "./containers/auth/Auth.connect";
 
 const store = configureStore();

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { Grid, Form, Checkbox, TextArea, Radio, Button, Input, Select } from 'semantic-ui-react'
+import React from "react";
+import { Grid, Form, TextArea, Select } from 'semantic-ui-react'
 
 const EscalatorPresetsView = ({ location }) => {
-  const [value, setValue] = useState('male')
+
   const pathName = location.pathname.substring(location.pathname.lastIndexOf('/') + 1);
 
   const options = [
@@ -11,9 +11,8 @@ const EscalatorPresetsView = ({ location }) => {
     { key: 'o', text: 'Other', value: 'other' },
   ]
 
-  const handleChange = (e, { val }) => {
-    console.log('Change!', val)
-    setValue(val)
+  const handleSubmit = () => {
+    console.log('Submit')
   }
 
   return (
@@ -28,58 +27,19 @@ const EscalatorPresetsView = ({ location }) => {
         <Grid.Column width={10}>
           <h1>{pathName}</h1>
           <Form>
-            <Form.Group widths='equal'>
-              <Form.Field
-                control={Input}
-                label='First name'
-                placeholder='First name'
-              />
-              <Form.Field
-                control={Input}
-                label='Last name'
-                placeholder='Last name'
-              />
+            <Form.Group widths='equal' inline>
+              <label>Group</label>
               <Form.Field
                 control={Select}
-                label='Gender'
                 options={options}
-                placeholder='Gender'
+                placeholder='Select a group to display content'
               />
-            </Form.Group>
-            <Form.Group inline>
-              <label>Quantity</label>
-              <Form.Field
-                control={Radio}
-                label='One'
-                value='1'
-                checked={value === '1'}
-                onChange={handleChange}
-              />
-              <Form.Field
-                control={Radio}
-                label='Two'
-                value='2'
-                checked={value === '2'}
-                onChange={handleChange}
-              />
-              <Form.Field
-                control={Radio}
-                label='Three'
-                value='3'
-                checked={value === '3'}
-                onChange={handleChange}
-              />
+              <Form.Button content='Create' onClick={handleSubmit} />
             </Form.Group>
             <Form.Field
               control={TextArea}
-              label='About'
-              placeholder='Tell us more about you...'
+              placeholder='Please select a group to display content'
             />
-            <Form.Field
-              control={Checkbox}
-              label='I agree to the Terms and Conditions'
-            />
-            <Form.Field control={Button}>Submit</Form.Field>
           </Form>
         </Grid.Column>
       </Grid.Row>

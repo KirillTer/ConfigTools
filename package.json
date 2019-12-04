@@ -20,7 +20,9 @@
     "reselect": "^4.0.0",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.88.1",
-    "superagent": "^5.1.0"
+    "superagent": "^5.1.0",
+    "yargs": "^14.2.0",
+    "zip-folder": "^1.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

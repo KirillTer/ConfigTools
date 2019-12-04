@@ -1,5 +1,6 @@
 import React from "react";
 import { Grid, Form, TextArea, Select } from 'semantic-ui-react'
+import Search from '../../../layout/Search'
 
 const EscalatorPresetsView = ({ location }) => {
 
@@ -27,18 +28,20 @@ const EscalatorPresetsView = ({ location }) => {
         <Grid.Column width={10}>
           <h1>{pathName}</h1>
           <Form>
-            <Form.Group widths='equal' inline>
-              <label>Group</label>
+            <Form.Group inline style={{ justifyContent: 'space-between' }}>
               <Form.Field
                 control={Select}
                 options={options}
+                label={'Group'}
                 placeholder='Select a group to display content'
               />
-              <Form.Button content='Create' onClick={handleSubmit} />
+              <Form.Button content='Create' onClick={handleSubmit} style={{ marginRight: '-1rem' }} />
             </Form.Group>
+            <Search />
             <Form.Field
               control={TextArea}
               placeholder='Please select a group to display content'
+              style={{ marginTop: '1rem', height: '40rem' }}
             />
           </Form>
         </Grid.Column>

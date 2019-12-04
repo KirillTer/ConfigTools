@@ -25,6 +25,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "package": "node ./jenkins/package-build",
     "test": "react-scripts test"
   },
   "eslintConfig": {

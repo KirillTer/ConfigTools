@@ -430,7 +430,7 @@ export const categories = [
                     {
                         id: 628,
                         icon: 'star',
-                        name: 'Edit Room Info Config'
+                        name: 'Bingo Room Config'
                     }
                 ]
             },

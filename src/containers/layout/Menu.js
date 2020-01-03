@@ -9,7 +9,6 @@ const SideMenu = () => {
     const [activeCategoryIndex, setActiveCategoryIndex] = useState([]);
 
     const handleItemClick = (e, titleProps) => {
-        console.log('!!!', titleProps)
         const { index } = titleProps;
         const newIndex = activeItemIndex;
         const currentIndexPosition = activeItemIndex.indexOf(index);

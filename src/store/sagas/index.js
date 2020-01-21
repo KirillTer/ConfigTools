@@ -5,9 +5,13 @@ import {
     LOAD_MAIN_START, LOAD_MAIN_SUCCESS, LOAD_MAIN_FAILURE,
     LOGIN_START, LOGIN_SUCCESS, LOGIN_FAILURE,
     SINGUP_START, SINGUP_SUCCESS, SINGUP_FAILURE,
-    LOGOUT_START, LOGOUT_SUCCESS, LOGOUT_FAILURE
+    LOGOUT_START, LOGOUT_SUCCESS, LOGOUT_FAILURE,
+    FEATCH_BINGO_ROOM_START, FEATCH_BINGO_ROOM_SUCCESS, FEATCH_BINGO_ROOM_FAILURE,
+    CREATE_BINGO_ROOM_START, CREATE_BINGO_ROOM_SUCCESS, CREATE_BINGO_ROOM_FAILURE,
+    EDIT_BINGO_ROOM_START, EDIT_BINGO_ROOM_SUCCESS, EDIT_BINGO_ROOM_FAILURE,
+    DELETE_BINGO_ROOM_START, DELETE_BINGO_ROOM_SUCCESS, DELETE_BINGO_ROOM_FAILURE
 } from '../actionTypes'
-import { fetchMainApi, singInApi, singUpApi } from '../../api'
+import { fetchMainApi, singInApi, singUpApi, featchBingoRoomApi, createBingoRoomApi, editBingoRoomApi, deleteBingoRoomApi } from '../../api'
 
 //Saga to receive core/initial data for application menu, categories etc...
 function* callFetchMain() {
@@ -68,6 +72,70 @@ function* callLogOut(action) {
     }
 }
 
+//Saga to handle callBingoRoomFeatch
+function* callBingoRoomFeatch(action) {
+    console.log('SAGA action callBingoRoomFeatch payload - ', action)
+    try {
+        const featchResult = yield call(featchBingoRoomApi, action.payload)
+        console.log('SAGA after API callBingoRoomFeatch - ', featchResult)
+        if (false) {
+            throw new Error(featchResult.message);
+        } else {
+            yield put({ type: FEATCH_BINGO_ROOM_SUCCESS, payload: featchResult });
+        }
+    } catch (error) {
+        yield put({ type: FEATCH_BINGO_ROOM_FAILURE, payload: error });
+    }
+}
+
+//Saga to handle callBingoRoomCreate
+function* callBingoRoomCreate(action) {
+    console.log('SAGA action callBingoRoomCreate payload - ', action)
+    try {
+        const createResult = yield call(createBingoRoomApi, action.payload)
+        console.log('SAGA after API callBingoRoomCreate - ', action.payload)
+        if (false) {
+            throw new Error(createResult.message);
+        } else {
+            yield put({ type: CREATE_BINGO_ROOM_SUCCESS, payload: action.payload });
+        }
+    } catch (error) {
+        yield put({ type: CREATE_BINGO_ROOM_FAILURE, payload: error });
+    }
+}
+
+//Saga to handle callBingoRoomEdit
+function* callBingoRoomEdit(action) {
+    console.log('SAGA action callBingoRoomEdit payload - ', action)
+    try {
+        const editResult = yield call(editBingoRoomApi, action.payload)
+        console.log('SAGA after API callBingoRoomEdit - ', editResult)
+        if (false) {
+            throw new Error(editResult.message);
+        } else {
+            yield put({ type: EDIT_BINGO_ROOM_SUCCESS, payload: editResult });
+        }
+    } catch (error) {
+        yield put({ type: EDIT_BINGO_ROOM_FAILURE, payload: error });
+    }
+}
+
+//Saga to handle callBingoRoomDelete
+function* callBingoRoomDelete(action) {
+    console.log('SAGA action callBingoRoomDelete payload - ', action)
+    try {
+        const deleteResult = yield call(deleteBingoRoomApi, action.payload)
+        console.log('SAGA after API callBingoRoomDelete - ', deleteResult)
+        if (false) {
+            throw new Error(deleteResult.message);
+        } else {
+            yield put({ type: DELETE_BINGO_ROOM_SUCCESS, payload: deleteResult });
+        }
+    } catch (error) {
+        yield put({ type: DELETE_BINGO_ROOM_FAILURE, payload: error });
+    }
+}
+
 //Watchers to run every saga
 function* mainWatcher() {
     yield takeLatest(LOAD_MAIN_START, callFetchMain)
@@ -81,6 +149,18 @@ function* singUpWatcher() {
 function* logOutWatcher() {
     yield takeLatest(LOGOUT_START, callLogOut)
 }
+function* featchBingoRoomWatcher() {
+    yield takeLatest(FEATCH_BINGO_ROOM_START, callBingoRoomFeatch)
+}
+function* createBingoRoomWatcher() {
+    yield takeLatest(CREATE_BINGO_ROOM_START, callBingoRoomCreate)
+}
+function* editBingoRoomWatcher() {
+    yield takeLatest(EDIT_BINGO_ROOM_START, callBingoRoomEdit)
+}
+function* deleteBingoRoomWatcher() {
+    yield takeLatest(DELETE_BINGO_ROOM_START, callBingoRoomDelete)
+}
 
 //Run all watchers
 export default function* rootSaga() {
@@ -88,6 +168,10 @@ export default function* rootSaga() {
         mainWatcher(),
         singInWatcher(),
         singUpWatcher(),
-        logOutWatcher()
+        logOutWatcher(),
+        featchBingoRoomWatcher(),
+        createBingoRoomWatcher(),
+        editBingoRoomWatcher(),
+        deleteBingoRoomWatcher(),
     ]);
 }

@@ -26,6 +26,8 @@ import ChatStatus from "./lowLevelPage/chatStatus/ChatStatus.connect";
 import StuckGames from "./lowLevelPage/stuckGames/StuckGames.connect";
 import IMSGameplay from "./lowLevelPage/iMSGameplay/IMSGameplay.connect";
 import EscalatorPresets from "./lowLevelPage/escalatorPresets/EscalatorPresets.connect";
+import BingoRoomConfig from "./lowLevelPage/bingoRoomConfig/BingoRoomConfig.connect";
+import NewBingoRoom from "./lowLevelPage/bingoRoomConfig/newBingoRoom/NewBingoRoom.connect";
 
 const MainView = ({ location, match, loadMain, updateHistoryAction }) => {
 
@@ -70,6 +72,8 @@ const MainView = ({ location, match, loadMain, updateHistoryAction }) => {
       <ProtectedRouter path={match.path + "/Stuck Games"} component={StuckGames} />
       <ProtectedRouter path={match.path + "/IMS Gameplay"} component={IMSGameplay} />
       <ProtectedRouter path={match.path + "/Escalator Preset"} component={EscalatorPresets} />
+      <ProtectedRouter path={match.path + "/Bingo Room Config"} component={BingoRoomConfig} />
+      <ProtectedRouter path={match.path + "/New Bingo Room"} component={NewBingoRoom} />
 
       <Route component={NotFound} />
     </Switch>

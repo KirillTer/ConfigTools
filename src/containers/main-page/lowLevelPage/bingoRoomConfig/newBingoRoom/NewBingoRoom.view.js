@@ -1,18 +1,40 @@
 import React, { useState }  from "react";
-import { Grid, Form, Button, Input, Divider, Modal, Header } from 'semantic-ui-react'
+import { history } from '../../../../../store/configureStore'
+import { Grid, Form, Button, Input, Divider, Modal, Header, Radio } from 'semantic-ui-react'
 
-const NewBingoRoomView = ({location}) => {
-  const [open, setOpen] = useState(true)
+const NewBingoRoomView = ({location, createAction}) => {
+  const [open, setOpen] = useState(false)
+  const [bingoRoom, setBingoRoom] = useState({
+    name: '',
+    availability: 'standalone',
+    type: '90',
+    balance: 'noRestrictions',
+    winningType: 'cash'
+  })
+
+  const options = [
+    { key: 'm', text: '90 Balls', value: '90' },
+    { key: 'f', text: '100 Balls', value: '100' },
+    { key: 'o', text: '110 Balls', value: '110' },
+  ]
 
   const pathName = location.pathname.substring(location.pathname.lastIndexOf('/') + 1);
 
+  const handleChange = (e, { name, value }) => {
+    console.log('handleChange', name, value)
+    setBingoRoom({ ...bingoRoom, [name]: value })
+  }
+
   const handleSubmit = () => {
+    console.log('BingoRoom', bingoRoom)
     setOpen(true)
   }
 
   const handleSave = () => {
-    console.log('Saved!')
+    console.log('Saved!', bingoRoom)
     setOpen(false)
+    createAction(bingoRoom)
+    history.push('/main/Bingo Room Config')
   }
 
   return (
@@ -25,77 +47,89 @@ const NewBingoRoomView = ({location}) => {
           <h1 style={{margin: '2rem 0'}}>{pathName}</h1>
           <Form>
             <Form.Field
-              id='name'
+              name='name'
               control={Input}
               label='Lobby display name'
               placeholder='Lobby display name'
               width='eight'
               size='small'
               style={{margin: '0.5rem 0 1rem 0'}}
+              value={bingoRoom.name}
+              onChange={handleChange}
             />
             <p style={{margin: '0.5rem 0'}}>Node - N/A</p>
             <p style={{margin: '0.5rem 0'}}>Key - N/A</p>
             <Form.Group grouped>
               <p style={{margin: '2rem 0 0.5rem 0'}}>Availability</p>
-              <Form.Field
+              <Form.Radio
+                name='availability'
+                control={Radio}
                 label='Standalone'
-                control='input'
-                type='radio'
-                name='htmlRadios'
-                style={{margin: '0.5rem 0.5rem 0.5rem 0'}}
+                value='standalone'
+                checked={bingoRoom.availability === 'standalone'}
+                onChange={handleChange}
               />
-              <Form.Field
+              <Form.Radio
+                name='availability'
+                control={Radio}
                 label='Network'
-                control='input'
-                type='radio'
-                name='htmlRadios'
-                style={{margin: '0.5rem 0.5rem 0.5rem 0'}}
+                value='network'
+                checked={bingoRoom.availability === 'network'}
+                onChange={handleChange}
               />
             </Form.Group>
             <Divider style={{margin: '2rem 0'}}/>
-            <Form.Field label='Game type' control='select' width='five' style={{margin: '0.5rem 0', height: '2.5rem'}}>
-              <option value='90'>90 Balls</option>
-              <option value='100'>100 Balls</option>
-              <option value='110'>110 Balls</option>
-            </Form.Field>
+            <Form.Select label='Game type' name='type' options={options} value={bingoRoom.type} onChange={handleChange} width='five' style={{margin: '0.5rem 0', height: '2.5rem'}} />
             <Form.Group grouped>
               <p style={{margin: '2rem 0 0.5rem 0'}}>Balance restriction</p>
-              <Form.Field
+              <Form.Radio
+                name='balance'
                 label='No  restrictions'
-                control='input'
-                type='radio'
-                name='htmlRadios'
+                control={Radio}
+                value='noRestrictions'
+                checked={bingoRoom.balance === 'noRestrictions'}
+                onChange={handleChange}
                 style={{margin: '0.5rem 0.5rem 0.5rem 0'}}
               />
-              <Form.Field
+              <Form.Radio
+                name='balance'
                 label='Cash only'
-                control='input'
-                type='radio'
-                name='htmlRadios'
+                control={Radio}
+                value='cashOnly'
+                checked={bingoRoom.balance === 'cashOnly'}
+                onChange={handleChange}
                 style={{margin: '0.5rem 0.5rem 0.5rem 0'}}
               />
             </Form.Group>
             <Form.Group grouped>
               <p style={{margin: '2rem 0 0.5rem 0'}}>Free winning type</p>
-              <Form.Field
+              <Form.Radio
+                name='winningType'
                 label='Cash'
-                control='input'
-                type='radio'
-                name='htmlRadios'
+                control={Radio}
+                value='cash'
+                checked={bingoRoom.winningType === 'cash'}
+                onChange={handleChange}
                 style={{margin: '0.5rem 0.5rem 0.5rem 0'}}
               />
-              <Form.Field
+              <Form.Radio
+                name='winningType'
                 label='Bingo bonus'
-                control='input'
+                control={Radio}
                 type='radio'
-                name='htmlRadios'
+                value='bingoBonus'
+                checked={bingoRoom.winningType === 'bingoBonus'}
+                onChange={handleChange}
                 style={{margin: '0.5rem 0.5rem 0.5rem 0'}}
               />
-              <Form.Field
+              <Form.Radio
+                name='winningType'
                 label='Other bonus'
-                control='input'
+                control={Radio}
                 type='radio'
-                name='htmlRadios'
+                value='otherBonus'
+                checked={bingoRoom.winningType === 'otherBonus'}
+                onChange={handleChange}
                 style={{margin: '0.5rem 0.5rem 0.5rem 0'}}
               />
             </Form.Group>

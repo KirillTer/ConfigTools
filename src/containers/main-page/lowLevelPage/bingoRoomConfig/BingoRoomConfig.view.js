@@ -1,9 +1,10 @@
 import React from "react";
 import { history } from '../../../../store/configureStore'
-import { Grid, Form, TextArea, Button } from 'semantic-ui-react'
+import { Grid, Form, Container, List, Button } from 'semantic-ui-react'
 import Search from '../../../layout/Search'
+import BingoRoomItem from './BingoRoomItem'
 
-const BingoRoomConfigView = ({location}) => {
+const BingoRoomConfigView = ({location, items}) => {
 
   const pathName = location.pathname.substring(location.pathname.lastIndexOf('/') + 1);
 
@@ -25,14 +26,15 @@ const BingoRoomConfigView = ({location}) => {
           <Form>
             <Form.Group inline style={{ justifyContent: 'space-between' }}>
               <h1>{pathName}</h1>
-              <Button primary content='Create' onClick={handleSubmit}>Create</Button>
+              <Button primary onClick={handleSubmit}>Create</Button>
             </Form.Group>
             <Search />
-            <Form.Field
-              control={TextArea}
-              placeholder='Please select a group to display content'
-              style={{ marginTop: '1rem', height: '40rem' }}
-            />
+            <Container style={{backgroundColor: 'white', margin: '3rem 0', border: '1px solid lightgrey', borderRadius: '0.3rem'}}>
+              <List>
+                <List.Item></List.Item>
+                {items.map((item, index) => <List.Item key={index}><BingoRoomItem item={item}/></List.Item>)}
+              </List>
+            </Container>
           </Form>
         </Grid.Column>
       </Grid.Row>

@@ -14,3 +14,6 @@ export const getShortcutSelector1 = createSelector(stateShortcutSelector, state 
 export const getShortcutSelector2 = createSelector(stateShortcutSelector, state => state.shortcut2);
 export const getShortcutSelector3 = createSelector(stateShortcutSelector, state => state.shortcut3);
 export const getShortcutSelector4 = createSelector(stateShortcutSelector, state => state.shortcut4);
+
+const stateBingoRoomSelector = state => state.curriedBingoRoomReducer;
+export const getBingoRoomSelector = createSelector(stateBingoRoomSelector, state => state.bingoRoom);

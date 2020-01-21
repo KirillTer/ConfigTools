@@ -39,3 +39,23 @@ export const singUpApi = ({ email, password }) => {
   // });
   // return userResult;
 }
+
+export const featchBingoRoomApi = () => {
+  console.log('Start featchBingoRoomApi API - ')
+
+}
+
+export const createBingoRoomApi = () => {
+  console.log('Start createBingoRoomApi API - ')
+
+}
+
+export const editBingoRoomApi = () => {
+  console.log('Start editBingoRoomApi API - ')
+
+}
+
+export const deleteBingoRoomApi = () => {
+  console.log('Start deleteBingoRoomApi API - ')
+
+}

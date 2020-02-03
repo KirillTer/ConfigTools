@@ -1,8 +1,10 @@
 import React, { useState }  from "react";
 import { history } from '../../../../../store/configureStore'
 import { Grid, Form, Button, Input, Divider, Modal, Header, Radio } from 'semantic-ui-react'
+import { useTranslation } from 'react-i18next';
 
 const NewBingoRoomView = ({location, createAction}) => {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false)
   const [bingoRoom, setBingoRoom] = useState({
     name: '',
@@ -49,7 +51,7 @@ const NewBingoRoomView = ({location, createAction}) => {
             <Form.Field
               name='name'
               control={Input}
-              label='Lobby display name'
+              label={t('NewBingoRoom.LobbyDisplayName')}
               placeholder='Lobby display name'
               width='eight'
               size='small'
@@ -57,7 +59,7 @@ const NewBingoRoomView = ({location, createAction}) => {
               value={bingoRoom.name}
               onChange={handleChange}
             />
-            <p style={{margin: '0.5rem 0'}}>Node - N/A</p>
+            <p style={{margin: '0.5rem 0'}}>{t('NewBingoRoom.Node')} - N/A</p>
             <p style={{margin: '0.5rem 0'}}>Key - N/A</p>
             <Form.Group grouped>
               <p style={{margin: '2rem 0 0.5rem 0'}}>Availability</p>

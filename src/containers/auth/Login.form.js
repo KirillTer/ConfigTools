@@ -44,11 +44,11 @@ const SingInView = ({
               label="Password"
               type="password"
             />
-            <Button color="blue" fluid size="large" type="submit">
+            <Button color="blue" fluid size="large" type="submit" style={{ marginTop: '2rem'}}>
               Login
             </Button>
-            <Checkbox label='Remember me' style={{ marginTop: '1rem', marginRight: 0, display: 'block', maxWidth: 150, textAlign: 'left' }} />
-            <NavLink to={"/main/Home"} style={{ display: 'block', textAlign: 'right', top: -19, left: 190, position: 'relative', maxWidth: 150 }}>Forget password?</NavLink>
+            {/* <Checkbox label='Remember me' style={{ marginTop: '2rem', marginRight: 0, display: 'block', maxWidth: 150, textAlign: 'left' }} /> */}
+            <NavLink to={"/main/Home"} style={{ display: 'block', marginTop: '2rem', textAlign: 'right' }}>Forget password?</NavLink>
             {errorLogin && <Message
               error
               content={errorLogin}

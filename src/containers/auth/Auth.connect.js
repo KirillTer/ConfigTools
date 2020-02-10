@@ -13,13 +13,13 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    singInAction: (email, password) => dispatch({
+    singInAction: (email, password, domain) => dispatch({
       type: LOGIN_START,
-      payload: { email, password }
+      payload: { email, password, domain }
     }),
-    singUpAction: (email, password) => dispatch({
+    singUpAction: (email, password, domain) => dispatch({
       type: SINGUP_START,
-      payload: { email, password }
+      payload: { email, password, domain }
     })
   };
 };

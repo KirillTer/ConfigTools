@@ -9,9 +9,9 @@ export const fetchMainApi = async () => {
   return body.list
 }
 
-export const singInApi = async ({ email, password }) => {
+export const singInApi = async ({ email, password, domain }) => {
   console.log('Start Sign IN API - ', email, password)
-  const body = await request.post('https://admin.qa.virtuefusion.com/back-office/auth/api/login')
+  const body = await request.post(`https://${domain}/back-office/auth/api/login`)
     // .type('form')
     // .set('Host', 'admin.qa.virtuefusion.com')
     // .set('Content-Type', 'application/json')
@@ -24,8 +24,8 @@ export const singInApi = async ({ email, password }) => {
   return body
 }
 
-export const singUpApi = ({ email, password }) => {
-  console.log('Start Sign UP API - ', email, password)
+export const singUpApi = ({ email, password, domain }) => {
+  console.log('Start Sign UP API - ', email, password, domain)
   // const userResult = firebase
   // .auth()
   // .createUserWithEmailAndPassword(email, password)

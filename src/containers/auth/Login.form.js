@@ -1,7 +1,7 @@
 import React from "react";
 import { reduxForm, Field } from "redux-form";
 import { NavLink } from "react-router-dom";
-import { Grid, Form, Segment, Button, Header, Image, Checkbox, Message } from 'semantic-ui-react'
+import { Grid, Form, Segment, Button, Header, Image, Message } from 'semantic-ui-react'
 import renderTextField from './RenderTextField'
 import logoImage from '../../assets/img_playtechOneLogo.svg';
 

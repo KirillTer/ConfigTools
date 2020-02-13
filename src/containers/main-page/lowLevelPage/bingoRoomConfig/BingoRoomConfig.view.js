@@ -1,12 +1,10 @@
 import React from "react";
 import { history } from '../../../../store/configureStore'
 import { Grid, Form, Container, List, Button } from 'semantic-ui-react'
-import { useTranslation } from 'react-i18next';
 import Search from '../../../layout/Search'
 import BingoRoomItem from './BingoRoomItem'
 
 const BingoRoomConfigView = ({location, items}) => {
-  const { t } = useTranslation();
   const pathName = location.pathname.substring(location.pathname.lastIndexOf('/') + 1);
 
   const handleSubmit = () => {
@@ -27,7 +25,7 @@ const BingoRoomConfigView = ({location, items}) => {
           <Form>
             <Form.Group inline style={{ justifyContent: 'space-between' }}>
               <h1>{pathName}</h1>
-              <Button primary onClick={handleSubmit}>{t('Common.Create')}</Button>
+              <Button primary onClick={handleSubmit}>Create</Button>
             </Form.Group>
             <Search />
             <Container style={{backgroundColor: 'white', margin: '3rem 0', border: '1px solid lightgrey', borderRadius: '0.3rem'}}>

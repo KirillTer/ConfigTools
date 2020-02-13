@@ -2,11 +2,9 @@ import React, {useState} from 'react';
 import { withRouter } from "react-router-dom";
 import { categories } from '../../../helpers/categories'
 import { Header, Button, Icon, Label, Dropdown } from "semantic-ui-react";
-import { useTranslation } from 'react-i18next';
 import SearchComponent from '../Search'
 
 const TopHeader = withRouter(({ loginStatus, singOutAction, onDisplay, location }) => {
-    const { i18n } = useTranslation();
     const [value, setValue] = useState()
     const pathName = location.pathname.substring(location.pathname.lastIndexOf('/') + 1);
     const pageName = categories.find(obj => obj.title === pathName)
@@ -38,11 +36,6 @@ const TopHeader = withRouter(({ loginStatus, singOutAction, onDisplay, location 
 
     const onDropdownChange = (e, {value}) => {
         setValue(value)
-        if(value === 'en') {
-            i18n.changeLanguage(value);
-        } else if (value === 'it') {
-            i18n.changeLanguage(value);
-        }
     }
 
     return (

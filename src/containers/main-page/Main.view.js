@@ -25,22 +25,29 @@ import Syndicates from "./lowLevelPage/syndicates/Syndicates.connect";
 import ChatStatus from "./lowLevelPage/chatStatus/ChatStatus.connect";
 import StuckGames from "./lowLevelPage/stuckGames/StuckGames.connect";
 import IMSGameplay from "./lowLevelPage/iMSGameplay/IMSGameplay.connect";
+import EscalatorPresets from "./lowLevelPage/escalatorPresets/EscalatorPresets.connect";
 
-const MainView = ({ mainData, loadMain, match }) => {
+const MainView = ({ location, match, loadMain, updateHistoryAction }) => {
 
   useEffect(() => {
     loadMain();
   }, [loadMain]);
 
+  useEffect(() => {
+    if (location.pathname !== "/main/Home") {
+      updateHistoryAction(location.pathname.substring(location.pathname.lastIndexOf('/') + 1));
+    }
+  });
+
   return (
     <Switch>
       <ProtectedRouter path={match.path + "/Home"} component={Home} />
-      <ProtectedRouter path={match.path + "/customer"} component={TopLevel} />
-      <ProtectedRouter path={match.path + "/marketing"} component={TopLevel} />
-      <ProtectedRouter path={match.path + "/promotion"} component={TopLevel} />
-      <ProtectedRouter path={match.path + "/transaction"} component={TopLevel} />
-      <ProtectedRouter path={match.path + "/financial"} component={TopLevel} />
-      <ProtectedRouter path={match.path + "/game"} component={TopLevel} />
+      <ProtectedRouter path={match.path + "/Customer Service"} component={TopLevel} />
+      <ProtectedRouter path={match.path + "/Marketing"} component={TopLevel} />
+      <ProtectedRouter path={match.path + "/Promotion Management"} component={TopLevel} />
+      <ProtectedRouter path={match.path + "/Transaction Data"} component={TopLevel} />
+      <ProtectedRouter path={match.path + "/Financial Data"} component={TopLevel} />
+      <ProtectedRouter path={match.path + "/Game Management"} component={TopLevel} />
 
       <ProtectedRouter path={match.path + "/Summary"} component={Summary} />
       <ProtectedRouter path={match.path + "/Assign Privilege"} component={AssignPrivilege} />
@@ -62,6 +69,7 @@ const MainView = ({ mainData, loadMain, match }) => {
       <ProtectedRouter path={match.path + "/Chat Status"} component={ChatStatus} />
       <ProtectedRouter path={match.path + "/Stuck Games"} component={StuckGames} />
       <ProtectedRouter path={match.path + "/IMS Gameplay"} component={IMSGameplay} />
+      <ProtectedRouter path={match.path + "/Escalator Preset"} component={EscalatorPresets} />
 
       <Route component={NotFound} />
     </Switch>

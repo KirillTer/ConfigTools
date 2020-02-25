@@ -9,6 +9,7 @@ const SideMenu = () => {
     const [activeCategoryIndex, setActiveCategoryIndex] = useState([]);
 
     const handleItemClick = (e, titleProps) => {
+        console.log('!!!', titleProps)
         const { index } = titleProps;
         const newIndex = activeItemIndex;
         const currentIndexPosition = activeItemIndex.indexOf(index);
@@ -42,25 +43,25 @@ const SideMenu = () => {
             >
                 <Menu.Item as={Link} to='/main/Home'>
                     <Icon name='home' style={{ float: 'left', margin: '0 1rem 0 2rem' }} />
-                    Home
+                    <span>Home</span>
                 </Menu.Item>
             </Accordion.Title>
-            {categories.map((item) => {
+            {categories.map((itemMenu) => {
                 return (
-                    <div key={item.id}>
+                    <div key={itemMenu.id}>
                         <Accordion.Title
-                            active={activeItemIndex.includes(item.id)}
-                            index={item.id}
+                            active={activeItemIndex.includes(itemMenu.id)}
+                            index={itemMenu.id}
                             onClick={handleItemClick}
                             style={{ padding: 0 }}
                         >
-                            <Menu.Item as={Link} to={`/main/${item.shortName}`} key={item.id}>
-                                <Icon name={item.icon} style={{ float: 'left', margin: '0 1rem 0 2rem' }} />
-                                <span style={{ fontSize: '1rem', fontWeight: 'bold' }}>{item.title}</span>
+                            <Menu.Item as={Link} to={`/main/${itemMenu.title}`}>
+                                <Icon name={itemMenu.icon} style={{ float: 'left', margin: '0 1rem 0 2rem' }} />
+                                <span style={{ fontSize: '1rem', fontWeight: 'bold' }}>{itemMenu.title}</span>
                             </Menu.Item>
                         </Accordion.Title>
-                        <Accordion.Content active={activeItemIndex.includes(item.id)} style={{ padding: 0 }}>
-                            {item.items.map((category) => {
+                        <Accordion.Content active={activeItemIndex.includes(itemMenu.id)} style={{ padding: 0 }}>
+                            {itemMenu.items.map((category) => {
                                 return (category.category ?
                                     <div key={category.id}>
                                         <Accordion.Title

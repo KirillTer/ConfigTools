@@ -24,8 +24,6 @@ export default class SearchExampleCategory extends Component {
   state = initialState
 
   handleResultSelect = (e, { result }) => {
-    console.log(result.description)
-    console.log('Search Props - ', this.props)
     if (this.props.val === 'shortcut') {
       this.setState({ value: result.title }, () => {
         this.props.parentCallback(this.state.value)
@@ -69,23 +67,21 @@ export default class SearchExampleCategory extends Component {
     const { isLoading, value, results } = this.state
 
     return (
-      <>
-        <Search
-          category
-          loading={isLoading}
-          onResultSelect={this.handleResultSelect}
-          onSearchChange={_.debounce(this.handleSearchChange, 500, {
-            leading: true,
-          })}
-          results={results}
-          value={value}
-          resultRenderer={this.resultRenderer}
-          {...this.props}
-          placeholder='Search Tools'
-          aligned='right'
-          minCharacters={3}
-        />
-      </>
+      <Search
+        category
+        loading={isLoading}
+        onResultSelect={this.handleResultSelect}
+        onSearchChange={_.debounce(this.handleSearchChange, 500, {
+          leading: true,
+        })}
+        results={results}
+        value={value}
+        resultRenderer={this.resultRenderer}
+        placeholder='Search Tools'
+        input={{ fluid: true }}
+        aligned='right'
+        minCharacters={3}
+      />
     )
   }
 }

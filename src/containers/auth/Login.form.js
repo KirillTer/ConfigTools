@@ -9,7 +9,7 @@ const validate = ({ email, password }) => {
   const errors = {}
   if (!email) {
     errors.email = "Email required";
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email)) {
+  } else if (email.length < 6) {
     errors.email = "Invalid email address";
   }
   if (!password) {
@@ -35,7 +35,7 @@ const SingInView = ({
               name="email"
               component={renderTextField}
               label="Email"
-              type="email"
+              type="text"
             />
             <Header as='h5' floated='left'>Password</Header>
             <Field

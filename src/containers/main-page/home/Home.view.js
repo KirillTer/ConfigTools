@@ -1,14 +1,16 @@
 import React, { useState } from "react";
+import _ from 'lodash'
+import { NavLink } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import { Grid, Header, Accordion, Icon, Modal } from 'semantic-ui-react'
 import { categories } from '../../../helpers/categories'
-import Search from '../../layout/Search'
+import SearchComponent from '../../layout/Search'
 
-const ExercisesView = withRouter(({ history, shortcut, updateHistoryAction, addShortcutAction, location }) => {
+const ExercisesView = withRouter(({ historyPath, shortcut1, shortcut2, shortcut3, shortcut4,
+  addShortcutAction1, addShortcutAction2, addShortcutAction3, addShortcutAction4 }) => {
 
   const [activeIndex, setActiveIndex] = useState([])
   const [modalData, setModalData] = useState('')
-  const pathName = location.pathname.substring(location.pathname.lastIndexOf('/') + 1);
 
   const handleClick = (e, titleProps) => {
     const { index } = titleProps;
@@ -22,17 +24,24 @@ const ExercisesView = withRouter(({ history, shortcut, updateHistoryAction, addS
     setActiveIndex([...newIndex]);
   };
 
-  const handleAddShortcut = () => {
-    addShortcutAction(pathName);
-  }
-
   const callbackFunction = (childData) => {
     setModalData(childData)
   }
 
-  const onApprove = () => {
-    console.log('MODAL!!!', modalData); // returns the button
-    addShortcutAction(modalData)
+  const onApprove1 = () => {
+    addShortcutAction1(modalData)
+  }
+
+  const onApprove2 = () => {
+    addShortcutAction2(modalData)
+  }
+
+  const onApprove3 = () => {
+    addShortcutAction3(modalData)
+  }
+
+  const onApprove4 = () => {
+    addShortcutAction4(modalData)
   }
 
   return (
@@ -41,60 +50,202 @@ const ExercisesView = withRouter(({ history, shortcut, updateHistoryAction, addS
       backgroundColor: '#F7F7F7',
       display: 'flex',
       flexDirection: 'column',
-      justifyContent: 'start'
+      justifyContent: 'start',
+      alignItems: 'center',
     }}>
-      <Header as='h4' style={{ width: '100vw', height: '5rem', marginTop: '5rem' }}>
-        <Search style={{ width: '17rem', margin: '0 auto' }} />
+      <Header as='h4' style={{ width: '100vw', height: '5rem', marginTop: '5rem', display: 'flex', justifyContent: 'center' }}>
+        <div style={{ width: '70rem' }}>
+          <SearchComponent />
+        </div>
       </Header>
-      <Grid.Row>
-        <Grid.Column style={{ margin: '0 4rem' }}>
+      <div style={{ width: '72rem', display: 'flex', justifyContent: 'space-between', padding: '0', marginBottom: '4rem' }}>
+        <Grid.Column>
           <div style={{
             width: '7rem',
             height: '7rem',
             display: 'flex',
             flexDirection: 'column',
             borderRadius: '6rem',
+            margin: '0.7rem 1rem',
             padding: '1rem',
             backgroundColor: 'white',
             fontSize: 10,
             textTransform: 'uppercase'
           }}>
-            <Icon size='big' name='list alternate outline' style={{ display: 'block', margin: '0.5rem auto' }} />
-            <p style={{ textAlign: 'center' }}>Some thing</p>
+            {historyPath.page ? <NavLink to={`/main/${historyPath.page}`} style={{ color: 'black' }}>
+              {categories.forEach(item => {
+                item.items.forEach(el => {
+                  if (_.find(el.elem, ['name', historyPath.page])) {
+                    historyPath['icon'] = _.find(el.elem, ['name', historyPath.page]).icon
+                    historyPath['category'] = item.title
+                  } else {
+                    return
+                  }
+                })
+              })}
+              <Icon size='big' name={historyPath.icon} style={{ display: 'block', margin: '0.5rem auto' }} />
+              <p style={{ textAlign: 'center' }}>{historyPath.icon ? historyPath.page : null}</p>
+              <span style={{ textTransform: 'none', marginLeft: '-2rem', fontSize: '1rem', display: 'block', position: 'absolute', top: '20rem', width: '9rem' }}>{historyPath.category}</span>
+            </NavLink> : <Grid.Column />}
           </div>
         </Grid.Column>
-        <Grid.Column style={{ margin: '0 4rem' }}>
+        <Grid.Column>
           <div style={{
             width: '7rem',
             height: '7rem',
             display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
+            flexDirection: 'column',
             borderRadius: '6rem',
+            margin: '0.7rem 1rem',
             padding: '1rem',
             backgroundColor: 'white',
             fontSize: 10,
             textTransform: 'uppercase'
-          }}>
-            {console.log('Shortcut from page - ', shortcut.page)}
+          }}>{shortcut1 ? <NavLink to={`/main/${shortcut1.page}`} style={{ color: 'black' }}>
+            {categories.forEach(item => {
+              item.items.forEach(el => {
+                if (_.find(el.elem, ['name', shortcut1.page])) {
+                  shortcut1['icon'] = _.find(el.elem, ['name', shortcut1.page]).icon
+                  shortcut1['category'] = item.title
+                } else {
+                  return
+                }
+              })
+            })}
+            <Icon size='big' name={shortcut1.icon} style={{ display: 'block', margin: '0.5rem auto', position: 'relative' }} />
+            <p style={{ textAlign: 'center' }}>{shortcut1.page}</p>
+            <span style={{ textTransform: 'none', marginLeft: '-2rem', fontSize: '1rem', display: 'block', position: 'absolute', top: '20rem', width: '9rem' }}>{shortcut1.category}</span>
+          </NavLink> :
             <Modal
               size='mini'
-              trigger={shortcut ? <div onClick={handleAddShortcut} >
-                <Icon size='big' name='plus' style={{ display: 'block', margin: '0.5rem auto' }} />
-                <p style={{ textAlign: 'center' }}>{shortcut.page}</p>
-              </div> :
-                <Icon size='huge' name='plus' style={{ display: 'block', margin: '0.5rem auto' }} />
-              }
+              trigger={<div>
+                <Icon size='huge' name='plus' style={{ display: 'block', margin: '1rem auto' }} />
+                <span style={{ textTransform: 'none', margin: '3.5rem 0 0 -0.5rem', fontSize: '1rem', display: 'block', whiteSpace: 'nowrap' }}>Add shortcut</span>
+              </div>}
               header='Add tool shortcut'
-              content={<Search val='shortcut' parentCallback={callbackFunction} />}
-              actions={['Cancel', { key: 'done', content: 'Add', positive: true, onClick: onApprove }]}
-            />
+              content={<SearchComponent val='shortcut' parentCallback={callbackFunction} />}
+              actions={['Cancel', { key: 'done', content: 'Add', positive: true, onClick: onApprove1 }]}
+            />}
           </div>
         </Grid.Column>
-        <Grid.Column style={{ margin: '0 4rem' }}></Grid.Column>
-        <Grid.Column style={{ margin: '0 4rem' }}></Grid.Column>
-        <Grid.Column style={{ margin: '0 4rem' }}></Grid.Column>
-      </Grid.Row>
+        {shortcut2 ? <Grid.Column>
+          <div style={{
+            width: '7rem',
+            height: '7rem',
+            display: 'flex',
+            flexDirection: 'column',
+            borderRadius: '6rem',
+            margin: '0.7rem 1rem',
+            padding: '1rem',
+            backgroundColor: 'white',
+            fontSize: 10,
+            textTransform: 'uppercase'
+          }}>{shortcut2.hasOwnProperty('page') ? <NavLink to={`/main/${shortcut2.page}`} style={{ color: 'black' }}>
+            {categories.forEach(item => {
+              item.items.forEach(el => {
+                if (_.find(el.elem, ['name', shortcut2.page])) {
+                  shortcut2['icon'] = _.find(el.elem, ['name', shortcut2.page]).icon
+                  shortcut2['category'] = item.title
+                } else {
+                  return
+                }
+              })
+            })}
+            <Icon size='big' name={shortcut2.icon} style={{ display: 'block', margin: '0.5rem auto', position: 'relative' }} />
+            <p style={{ textAlign: 'center' }}>{shortcut2.page}</p>
+            <span style={{ textTransform: 'none', marginLeft: '-2rem', fontSize: '1rem', display: 'block', position: 'absolute', top: '20rem', width: '9rem' }}>{shortcut2.category}</span>
+          </NavLink> :
+            <Modal
+              size='mini'
+              trigger={<div>
+                <Icon size='huge' name='plus' style={{ display: 'block', margin: '1rem auto' }} />
+                <span style={{ textTransform: 'none', margin: '3.5rem 0 0 -0.5rem', fontSize: '1rem', display: 'block', whiteSpace: 'nowrap' }}>Add shortcut</span>
+              </div>}
+              header='Add tool shortcut'
+              content={<SearchComponent val='shortcut' parentCallback={callbackFunction} />}
+              actions={['Cancel', { key: 'done', content: 'Add', positive: true, onClick: onApprove2 }]}
+            />}
+          </div>
+        </Grid.Column> : <Grid.Column><div style={{ width: '9rem' }}></div></Grid.Column>}
+        {shortcut3 ? <Grid.Column>
+          <div style={{
+            width: '7rem',
+            height: '7rem',
+            display: 'flex',
+            flexDirection: 'column',
+            borderRadius: '6rem',
+            margin: '0.7rem 1rem',
+            padding: '1rem',
+            backgroundColor: 'white',
+            fontSize: 10,
+            textTransform: 'uppercase'
+          }}>{shortcut3.hasOwnProperty('page') ? <NavLink to={`/main/${shortcut3.page}`} style={{ color: 'black' }}>
+            {categories.forEach(item => {
+              item.items.forEach(el => {
+                if (_.find(el.elem, ['name', shortcut3.page])) {
+                  shortcut3['icon'] = _.find(el.elem, ['name', shortcut3.page]).icon
+                  shortcut3['category'] = item.title
+                } else {
+                  return
+                }
+              })
+            })}
+            <Icon size='big' name={shortcut3.icon} style={{ display: 'block', margin: '0.5rem auto', position: 'relative' }} />
+            <p style={{ textAlign: 'center' }}>{shortcut3.page}</p>
+            <span style={{ textTransform: 'none', marginLeft: '-2rem', fontSize: '1rem', display: 'block', position: 'absolute', top: '20rem', width: '9rem' }}>{shortcut3.category}</span>
+          </NavLink> :
+            <Modal
+              size='mini'
+              trigger={<div>
+                <Icon size='huge' name='plus' style={{ display: 'block', margin: '1rem auto' }} />
+                <span style={{ textTransform: 'none', margin: '3.5rem 0 0 -0.5rem', fontSize: '1rem', display: 'block', whiteSpace: 'nowrap' }}>Add shortcut</span>
+              </div>}
+              header='Add tool shortcut'
+              content={<SearchComponent val='shortcut' parentCallback={callbackFunction} />}
+              actions={['Cancel', { key: 'done', content: 'Add', positive: true, onClick: onApprove3 }]}
+            />}
+          </div>
+        </Grid.Column> : <Grid.Column><div style={{ width: '9rem' }}></div></Grid.Column>}
+        {shortcut4 ? <Grid.Column>
+          <div style={{
+            width: '7rem',
+            height: '7rem',
+            display: 'flex',
+            flexDirection: 'column',
+            borderRadius: '6rem',
+            margin: '0.7rem 1rem',
+            padding: '1rem',
+            backgroundColor: 'white',
+            fontSize: 10,
+            textTransform: 'uppercase'
+          }}>{shortcut4.hasOwnProperty('page') ? <NavLink to={`/main/${shortcut4.page}`} style={{ color: 'black' }}>
+            {categories.forEach(item => {
+              item.items.forEach(el => {
+                if (_.find(el.elem, ['name', shortcut4.page])) {
+                  shortcut4['icon'] = _.find(el.elem, ['name', shortcut4.page]).icon
+                  shortcut4['category'] = item.title
+                } else {
+                  return
+                }
+              })
+            })}
+            <Icon size='big' name={shortcut4.icon} style={{ display: 'block', margin: '0.5rem auto', position: 'relative' }} />
+            <p style={{ textAlign: 'center' }}>{shortcut4.page}</p>
+            <span style={{ textTransform: 'none', marginLeft: '-2rem', fontSize: '1rem', display: 'block', position: 'absolute', top: '20rem', width: '9rem' }}>{shortcut4.category}</span>
+          </NavLink> :
+            <Modal
+              size='mini'
+              trigger={<div>
+                <Icon size='huge' name='plus' style={{ display: 'block', margin: '1rem auto' }} />
+                <span style={{ textTransform: 'none', margin: '3.5rem 0 0 -0.5rem', fontSize: '1rem', display: 'block', whiteSpace: 'nowrap' }}>Add shortcut</span>
+              </div>}
+              header='Add tool shortcut'
+              content={<SearchComponent val='shortcut' parentCallback={callbackFunction} />}
+              actions={['Cancel', { key: 'done', content: 'Add', positive: true, onClick: onApprove4 }]}
+            />}
+          </div>
+        </Grid.Column> : <Grid.Column><div style={{ width: '9rem' }}></div></Grid.Column>}
+      </div>
 
       <Grid.Row>
         <Grid.Column width={10}>

@@ -1,5 +1,5 @@
-import {connect} from "react-redux";
-import { LOAD_MAIN_START } from '../../store/actionTypes'
+import { connect } from "react-redux";
+import { LOAD_MAIN_START, SHORTCUT_UPDATE } from '../../store/actionTypes'
 import { getMainSelector } from '../../store/selectors'
 import MainView from "./Main.view";
 
@@ -14,7 +14,11 @@ const mapDispatchToProps = dispatch => {
   return {
     loadMain: () => dispatch({
       type: LOAD_MAIN_START
-  }),
+    }),
+    updateHistoryAction: (page) => dispatch({
+      type: SHORTCUT_UPDATE,
+      payload: { page }
+    }),
   };
 };
 

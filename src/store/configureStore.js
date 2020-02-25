@@ -7,7 +7,7 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import rootSaga from '../store/sagas/'
 import reducers from './reducers/'
 
-export const history = createBrowserHistory()
+export const history = createBrowserHistory({basename:'/bos'});
 const sagaMiddleware = createSagaMiddleware();
 
 export default function configureStore(preloadedState) {
@@ -20,7 +20,7 @@ export default function configureStore(preloadedState) {
         sagaMiddleware
       ),
     ),
-  )
+  );
 
   sagaMiddleware.run(rootSaga);
   

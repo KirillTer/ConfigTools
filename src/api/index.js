@@ -14,11 +14,10 @@ export const singInApi = async ({ email, password }) => {
   const body = await request.post('https://admin.qa.virtuefusion.com/back-office/auth/api/login')
     // .type('form')
     // .set('Host', 'admin.qa.virtuefusion.com')
-    // .set('Content-Type', 'application/json')
+    .set('Content-Type', 'application/json')
     .send({
-      login_name: `"${email}"`,
-      password: `"${password}"`,
-      dest: ""
+      login_name: `${email}`,
+      password: `${password}`
     })
   console.log('API - ', body)
   return body

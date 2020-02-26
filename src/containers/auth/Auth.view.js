@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch, NavLink } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 
 import SingIn from './Login.form'
 import SingUp from './SingUp.form'
@@ -19,10 +19,6 @@ const AuthView = ({ user, match, singInAction, singUpAction, error }) => {
 
   return (
     <>
-      <h2>Auth page</h2>
-      <NavLink to={match.path + "/singin"}>Sing In</NavLink>
-      <br />
-      <NavLink to={match.path + "/singup"}>Sing Up</NavLink>
       <Switch>
         <Route path={match.path + "/singin"} render={() => (<SingIn onSubmit={handleSingIn} errorLogin={error} />)} />
         <Route path={match.path + "/singup"} render={() => (<SingUp onSubmit={handleSingUp} />)} />

@@ -1,11 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { withRouter } from "react-router-dom";
 import { categories } from '../../../helpers/categories'
 import { Header, Button, Icon, Label, Dropdown } from "semantic-ui-react";
+import { useTranslation } from 'react-i18next';
 import SearchComponent from '../Search'
 
 const TopHeader = withRouter(({ loginStatus, singOutAction, onDisplay, location }) => {
-
+    const { i18n } = useTranslation();
+    const [value, setValue] = useState()
     const pathName = location.pathname.substring(location.pathname.lastIndexOf('/') + 1);
     const pageName = categories.find(obj => obj.title === pathName)
 
@@ -16,12 +18,14 @@ const TopHeader = withRouter(({ loginStatus, singOutAction, onDisplay, location 
     )
 
     const options = [
-        { key: 'user', text: 'user name', icon: 'user' },
-        { key: 'settings', text: 'Change password', icon: 'settings' },
+        { key: 'user', text: 'User name', icon: 'user', value: 'user' },
+        { key: 'settings', text: 'Change password', icon: 'settings', value: 'settings' },
+        { key: 'en', text: 'English', icon: 'user', value: 'en' },
+        { key: 'it', text: 'Italy', icon: 'user', value: 'it' },
         loginStatus ?
-            { key: 'auth', text: 'Log Out', icon: 'sign out' }
+            { key: 'auth', text: 'Log Out', icon: 'sign out', value: 'singout' }
             :
-            { key: 'auth', text: 'Log In', icon: 'sign in' }
+            { key: 'auth', text: 'Log In', icon: 'sign in', value: 'singout' }
         // <Button inverted onClick={() => onLogout()}>Log out</Button>
         // :
         // <Button inverted as={RouterLink} to='/auth'>Log in</Button>
@@ -31,6 +35,15 @@ const TopHeader = withRouter(({ loginStatus, singOutAction, onDisplay, location 
     // const onLogout = () => {
     //     singOutAction();
     // }
+
+    const onDropdownChange = (e, {value}) => {
+        setValue(value)
+        if(value === 'en') {
+            i18n.changeLanguage(value);
+        } else if (value === 'it') {
+            i18n.changeLanguage(value);
+        }
+    }
 
     return (
         <Header size='huge' textAlign='right' style={{
@@ -69,6 +82,8 @@ const TopHeader = withRouter(({ loginStatus, singOutAction, onDisplay, location 
                     pointing='top right'
                     icon={null}
                     style={{ margin: '0 2rem 0 0.5rem' }}
+                    value={value}
+                    onChange={onDropdownChange}
                 />
             </div>
         </Header>

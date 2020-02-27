@@ -1,8 +1,10 @@
 import React, { useState }  from "react";
 import { history } from '../../../../../store/configureStore'
 import { Grid, Form, Button, Input, Divider, Modal, Header, Radio } from 'semantic-ui-react'
+import { useTranslation } from 'react-i18next';
 
 const NewBingoRoomView = ({location, createAction}) => {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false)
   const [bingoRoom, setBingoRoom] = useState({
     name: '',
@@ -49,22 +51,22 @@ const NewBingoRoomView = ({location, createAction}) => {
             <Form.Field
               name='name'
               control={Input}
-              label='Lobby display name'
-              placeholder='Lobby display name'
+              label={t('NewBingoRoom.LobbyDisplayName')}
+              placeholder={t('NewBingoRoom.LobbyDisplayName')}
               width='eight'
               size='small'
               style={{margin: '0.5rem 0 1rem 0'}}
               value={bingoRoom.name}
               onChange={handleChange}
             />
-            <p style={{margin: '0.5rem 0'}}>Node - N/A</p>
-            <p style={{margin: '0.5rem 0'}}>Key - N/A</p>
+            <p style={{margin: '0.5rem 0'}}>{t('NewBingoRoom.Node')} - N/A</p>
+            <p style={{margin: '0.5rem 0'}}>{t('NewBingoRoom.Key')} - N/A</p>
             <Form.Group grouped>
-              <p style={{margin: '2rem 0 0.5rem 0'}}>Availability</p>
+              <p style={{margin: '2rem 0 0.5rem 0'}}>{t('NewBingoRoom.Availability')}</p>
               <Form.Radio
                 name='availability'
                 control={Radio}
-                label='Standalone'
+                label={t('NewBingoRoom.Standalone')}
                 value='standalone'
                 checked={bingoRoom.availability === 'standalone'}
                 onChange={handleChange}
@@ -72,19 +74,19 @@ const NewBingoRoomView = ({location, createAction}) => {
               <Form.Radio
                 name='availability'
                 control={Radio}
-                label='Network'
+                label={t('NewBingoRoom.Network')}
                 value='network'
                 checked={bingoRoom.availability === 'network'}
                 onChange={handleChange}
               />
             </Form.Group>
             <Divider style={{margin: '2rem 0'}}/>
-            <Form.Select label='Game type' name='type' options={options} value={bingoRoom.type} onChange={handleChange} width='five' style={{margin: '0.5rem 0', height: '2.5rem'}} />
+            <Form.Select label={t('NewBingoRoom.GameType')} name='type' options={options} value={bingoRoom.type} onChange={handleChange} width='five' style={{margin: '0.5rem 0', height: '2.5rem'}} />
             <Form.Group grouped>
-              <p style={{margin: '2rem 0 0.5rem 0'}}>Balance restriction</p>
+              <p style={{margin: '2rem 0 0.5rem 0'}}>{t('NewBingoRoom.BalanceRestriction')}</p>
               <Form.Radio
                 name='balance'
-                label='No  restrictions'
+                label={t('NewBingoRoom.NoRestrictions')}
                 control={Radio}
                 value='noRestrictions'
                 checked={bingoRoom.balance === 'noRestrictions'}
@@ -93,7 +95,7 @@ const NewBingoRoomView = ({location, createAction}) => {
               />
               <Form.Radio
                 name='balance'
-                label='Cash only'
+                label={t('NewBingoRoom.CashOnly')}
                 control={Radio}
                 value='cashOnly'
                 checked={bingoRoom.balance === 'cashOnly'}
@@ -105,7 +107,7 @@ const NewBingoRoomView = ({location, createAction}) => {
               <p style={{margin: '2rem 0 0.5rem 0'}}>Free winning type</p>
               <Form.Radio
                 name='winningType'
-                label='Cash'
+                label={t('NewBingoRoom.Cash')}
                 control={Radio}
                 value='cash'
                 checked={bingoRoom.winningType === 'cash'}
@@ -114,7 +116,7 @@ const NewBingoRoomView = ({location, createAction}) => {
               />
               <Form.Radio
                 name='winningType'
-                label='Bingo bonus'
+                label={t('NewBingoRoom.BingoBonus')}
                 control={Radio}
                 type='radio'
                 value='bingoBonus'
@@ -124,7 +126,7 @@ const NewBingoRoomView = ({location, createAction}) => {
               />
               <Form.Radio
                 name='winningType'
-                label='Other bonus'
+                label={t('NewBingoRoom.OtherBonus')}
                 control={Radio}
                 type='radio'
                 value='otherBonus'
@@ -138,8 +140,8 @@ const NewBingoRoomView = ({location, createAction}) => {
               display: 'flex',
               justifyContent: 'flex-end'
             }}>
-              <Button style={{marginRight: '2rem'}}>Discard</Button>
-              <Button primary type='submit' onClick={handleSubmit}>Create</Button>
+              <Button style={{marginRight: '2rem'}}>{t('NewBingoRoom.Discard')}</Button>
+              <Button primary type='submit' onClick={handleSubmit}>{t('NewBingoRoom.Create')}</Button>
             </Form.Group>
           </Form>
         </Grid.Column>
@@ -147,21 +149,21 @@ const NewBingoRoomView = ({location, createAction}) => {
       <Modal size='small' open={open} onClose={() => setOpen(false)}>
         <Modal.Content style={{padding: '2rem'}}>
           <Modal.Description>
-            <Header>Lobby Display Name</Header>
+            <Header>{t('NewBingoRoom.LobbyDisplayName')}</Header>
             <div>
-              <span>Language:</span>
+              <span>{t('NewBingoRoom.Language')}:</span>
               <Input style={{width: '43rem', margin: '1rem 0 0 1.8rem'}}/>
             </div>
             <div style={{margin: '1rem 0'}}>
-              <span>Language A:</span>
+              <span>{t('NewBingoRoom.Language')} A:</span>
               <Input style={{width: '43rem', margin: '0.5rem 0 0 1rem'}}/>
             </div>
             <div style={{margin: '1rem 0'}}>
-              <span>Language B:</span>
+              <span>{t('NewBingoRoom.Language')} B:</span>
               <Input style={{width: '43rem', margin: '0.5rem 0 0 1rem'}}/>
             </div>
             <div style={{margin: '1rem 0'}}>
-              <span>Language C:</span>
+              <span>{t('NewBingoRoom.Language')} C:</span>
               <Input style={{width: '43rem', margin: '0.5rem 0 0 1rem'}}/>
             </div>
           </Modal.Description>
@@ -170,12 +172,14 @@ const NewBingoRoomView = ({location, createAction}) => {
             justifyContent: 'center',
             margin: '2rem 0 0 0'
           }}>
-            <Button onClick={() => setOpen(false)}>
-              Cancel
-            </Button>
+            <Button 
+              content={t('Common.Cancel')}
+              onClick={() => setOpen(false)}
+              style={{margin: '0 2rem', width: '6.1rem'}}
+            />
             <Button
               primary
-              content="Save"
+              content={t('Common.Save')}
               onClick={handleSave}
               style={{margin: '0 2rem', width: '6.1rem'}}
             />

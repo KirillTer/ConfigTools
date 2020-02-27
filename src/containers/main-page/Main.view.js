@@ -42,41 +42,41 @@ const MainView = ({ location, match, loadMain, updateHistoryAction }) => {
   });
 
   return (
-    <Switch>
-      <ProtectedRouter path={match.path + "/Home"} component={Home} />
-      <ProtectedRouter path={match.path + "/Customer Service"} component={TopLevel} />
-      <ProtectedRouter path={match.path + "/Marketing"} component={TopLevel} />
-      <ProtectedRouter path={match.path + "/Promotion Management"} component={TopLevel} />
-      <ProtectedRouter path={match.path + "/Transaction Data"} component={TopLevel} />
-      <ProtectedRouter path={match.path + "/Financial Data"} component={TopLevel} />
-      <ProtectedRouter path={match.path + "/Game Management"} component={TopLevel} />
+      <Switch>
+        <ProtectedRouter path={match.path + "/Home"} component={Home} />
+        <ProtectedRouter path={match.path + "/Customer Service"} component={TopLevel} />
+        <ProtectedRouter path={match.path + "/Marketing"} component={TopLevel} />
+        <ProtectedRouter path={match.path + "/Promotion Management"} component={TopLevel} />
+        <ProtectedRouter path={match.path + "/Transaction Data"} component={TopLevel} />
+        <ProtectedRouter path={match.path + "/Financial Data"} component={TopLevel} />
+        <ProtectedRouter path={match.path + "/Game Management"} component={TopLevel} />
 
-      <ProtectedRouter path={match.path + "/Summary"} component={Summary} />
-      <ProtectedRouter path={match.path + "/Assign Privilege"} component={AssignPrivilege} />
-      <ProtectedRouter path={match.path + "/Access Levels"} component={AccessLevels} />
-      <ProtectedRouter path={match.path + "/Account Status"} component={AccountStatus} />
-      <ProtectedRouter path={match.path + "/Forget Status"} component={ForgetStatus} />
-      <ProtectedRouter path={match.path + "/Bet History"} component={BetHistory} />
-      <ProtectedRouter path={match.path + "/Promotions"} component={Promotions} />
-      <ProtectedRouter path={match.path + "/Bonuses"} component={Bonuses} />
-      <ProtectedRouter path={match.path + "/Bonus Opt Out"} component={BonusOptOut} />
-      <ProtectedRouter path={match.path + "/List Adjustments"} component={ListAdjustments} />
-      <ProtectedRouter path={match.path + "/Promotion History"} component={PromotionHistory} />
-      <ProtectedRouter path={match.path + "/Loyalty Levels"} component={LoyaltyLevels} />
-      <ProtectedRouter path={match.path + "/Adjustment"} component={Adjustment} />
-      <ProtectedRouter path={match.path + "/Credit Chat Game"} component={CreditChatGame} />
-      <ProtectedRouter path={match.path + "/Statement"} component={Statement} />
-      <ProtectedRouter path={match.path + "/Edit Chat Name"} component={EditChatName} />
-      <ProtectedRouter path={match.path + "/Syndicates"} component={Syndicates} />
-      <ProtectedRouter path={match.path + "/Chat Status"} component={ChatStatus} />
-      <ProtectedRouter path={match.path + "/Stuck Games"} component={StuckGames} />
-      <ProtectedRouter path={match.path + "/IMS Gameplay"} component={IMSGameplay} />
-      <ProtectedRouter path={match.path + "/Escalator Preset"} component={EscalatorPresets} />
-      <ProtectedRouter path={match.path + "/Bingo Room Config"} component={BingoRoomConfig} />
-      <ProtectedRouter path={match.path + "/New Bingo Room"} component={NewBingoRoom} />
+        <ProtectedRouter path={match.path + "/Summary"} component={Summary} />
+        <ProtectedRouter path={match.path + "/Assign Privilege"} component={AssignPrivilege} />
+        <ProtectedRouter path={match.path + "/Access Levels"} component={AccessLevels} />
+        <ProtectedRouter path={match.path + "/Account Status"} component={AccountStatus} />
+        <ProtectedRouter path={match.path + "/Forget Status"} component={ForgetStatus} />
+        <ProtectedRouter path={match.path + "/Bet History"} component={BetHistory} />
+        <ProtectedRouter path={match.path + "/Promotions"} component={Promotions} />
+        <ProtectedRouter path={match.path + "/Bonuses"} component={Bonuses} />
+        <ProtectedRouter path={match.path + "/Bonus Opt Out"} component={BonusOptOut} />
+        <ProtectedRouter path={match.path + "/List Adjustments"} component={ListAdjustments} />
+        <ProtectedRouter path={match.path + "/Promotion History"} component={PromotionHistory} />
+        <ProtectedRouter path={match.path + "/Loyalty Levels"} component={LoyaltyLevels} />
+        <ProtectedRouter path={match.path + "/Adjustment"} component={Adjustment} />
+        <ProtectedRouter path={match.path + "/Credit Chat Game"} component={CreditChatGame} />
+        <ProtectedRouter path={match.path + "/Statement"} component={Statement} />
+        <ProtectedRouter path={match.path + "/Edit Chat Name"} component={EditChatName} />
+        <ProtectedRouter path={match.path + "/Syndicates"} component={Syndicates} />
+        <ProtectedRouter path={match.path + "/Chat Status"} component={ChatStatus} />
+        <ProtectedRouter path={match.path + "/Stuck Games"} component={StuckGames} />
+        <ProtectedRouter path={match.path + "/IMS Gameplay"} component={IMSGameplay} />
+        <ProtectedRouter path={match.path + "/Escalator Preset"} component={EscalatorPresets} />
+        <ProtectedRouter path={match.path + "/Bingo Room Config"} component={BingoRoomConfig} />
+        <ProtectedRouter path={match.path + "/New Bingo Room"} component={NewBingoRoom} />
 
-      <Route component={NotFound} />
-    </Switch>
+        <Route component={NotFound} />
+      </Switch>
   );
 };
 

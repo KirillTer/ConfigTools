@@ -8,14 +8,18 @@ import logoImage from '../../assets/img_playtechOneLogo.svg';
 const validate = ({ email, password }) => {
   const errors = {}
   if (!email) {
-    errors.email = "Email required";
+    errors.email = "Username required";
   } else if (email.length < 6) {
-    errors.email = "Invalid email address";
+    errors.email = "Invalid username";
+  } else if (email.length > 15) {
+    errors.email = "Username should be less then 15 characters";
   }
   if (!password) {
     errors.password = "Password required";
   } else if (password.length < 6) {
     errors.password = "Password should be at least 6 characters";
+  } else if (password.length > 15) {
+    errors.password = "Password should be less then 15 characters";
   }
   return errors
 }
@@ -44,11 +48,10 @@ const SingInView = ({
               label="Password"
               type="password"
             />
-            <Button color="blue" fluid size="large" type="submit" style={{ marginTop: '2rem'}}>
+            <Button color="blue" fluid size="large" type="submit">
               Login
             </Button>
-            {/* <Checkbox label='Remember me' style={{ marginTop: '2rem', marginRight: 0, display: 'block', maxWidth: 150, textAlign: 'left' }} /> */}
-            <NavLink to={"/main/Home"} style={{ display: 'block', marginTop: '2rem', textAlign: 'right' }}>Forget password?</NavLink>
+            <NavLink to={"/main/Home"} style={{ display: 'block', textAlign: 'right', top: -19, left: 190, position: 'relative', maxWidth: 150 }}>Forget password?</NavLink>
             {errorLogin && <Message
               error
               content={errorLogin}

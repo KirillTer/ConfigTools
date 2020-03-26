@@ -2,6 +2,9 @@ import { createSelector } from 'reselect'
 
 const stateMainSelector = state => state.curriedMainReducer;
 export const getMainSelector = createSelector(stateMainSelector, state => state.main);
+export const getCurrentLanguageSelector = createSelector(stateMainSelector, state => state.current_language);
+export const getDefaultLanguageSelector = createSelector(stateMainSelector, state => state.default_language);
+export const getAvailableListLanguageSelector = createSelector(stateMainSelector, state => state.available_languages_list);
 
 const stateAuthSelector = state => state.curriedAuthReducer;
 export const getUserSelector = createSelector(stateAuthSelector, state => state.user);

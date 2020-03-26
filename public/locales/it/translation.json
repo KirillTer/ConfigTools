@@ -1,0 +1,25 @@
+{
+	"Common": {
+		"Save": "Salva",
+		"Cancel": "Annulla",
+		"Create": "Creare"
+	},
+	"NewBingoRoom": {
+		"LobbyDisplayName": "Nome visualizzato della lobby",
+		"Node": "Nodo",
+		"Key": "Chiave",
+		"Availability": "Disponibilità",
+		"Standalone": "Indipendente, autonomo",
+		"Network": "Rete",
+		"GameType": "Tipo di gioco",
+		"BalanceRestriction": "Limitazione del saldo",
+		"NoRestrictions": "Senza restrizioni",
+		"CashOnly": "Si accettano solo contanti",
+		"Cash": "Denaro contante",
+		"BingoBonus": "Bonus di bingo",
+		"OtherBonus": "Altro bonus",
+		"Discard": "Scartare",
+		"Create": "Creare",
+		"Language": "Linguaggio"
+	}
+}

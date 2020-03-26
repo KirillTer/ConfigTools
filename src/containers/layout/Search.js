@@ -15,7 +15,7 @@ const source = categories.reduce((memo, item) => {
   const name = item.title
   memo[name] = {
     name,
-    results: getResults((item.items.map(i => i.elem)).flat()),
+    results: getResults((item.items.map(i => i.elem)).reduce((acc, val) => acc.concat(val))),
   }
   return memo
 }, {})

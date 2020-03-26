@@ -1,13 +1,20 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { withRouter } from "react-router-dom";
+import { history } from '../../../store/configureStore'
 import { categories } from '../../../helpers/categories'
 import { Header, Button, Icon, Label, Dropdown } from "semantic-ui-react";
+import { useTranslation } from 'react-i18next';
 import SearchComponent from '../Search'
 
-const TopHeader = withRouter(({ loginStatus, singOutAction, onDisplay, location }) => {
+const TopHeader = withRouter(({ loginStatus, singOutAction, getLanguages, onDisplay, location, currentLang, defaultLang, listLang }) => {
+    const { i18n } = useTranslation();
     const [value, setValue] = useState()
     const pathName = location.pathname.substring(location.pathname.lastIndexOf('/') + 1);
     const pageName = categories.find(obj => obj.title === pathName)
+
+    useEffect(() => {
+        getLanguages(window.location.hostname);
+    }, [getLanguages]);
 
     const trigger = (
         <span>
@@ -23,19 +30,20 @@ const TopHeader = withRouter(({ loginStatus, singOutAction, onDisplay, location 
         loginStatus ?
             { key: 'auth', text: 'Log Out', icon: 'sign out', value: 'singout' }
             :
-            { key: 'auth', text: 'Log In', icon: 'sign in', value: 'singout' }
-        // <Button inverted onClick={() => onLogout()}>Log out</Button>
-        // :
-        // <Button inverted as={RouterLink} to='/auth'>Log in</Button>
-
+            { key: 'auth', text: 'Log In', icon: 'sign in', value: 'singin' }
     ]
 
-    // const onLogout = () => {
-    //     singOutAction();
-    // }
-
-    const onDropdownChange = (e, {value}) => {
+    const onDropdownChange = (e, { value }) => {
         setValue(value)
+        if (value === 'en') {
+            i18n.changeLanguage(value);
+        } else if (value === 'it') {
+            i18n.changeLanguage(value);
+        } else if (value === 'singout') {
+            singOutAction();
+        } else if (value === 'singin') {
+            history.push(`/auth/singin`)
+        }
     }
 
     return (
@@ -51,6 +59,7 @@ const TopHeader = withRouter(({ loginStatus, singOutAction, onDisplay, location 
             width: '100%',
             zIndex: '1000'
         }}>
+            {console.log('HEADER', currentLang, defaultLang, listLang)}
             <div>
                 <Button icon floated='left' style={{ background: '#2185D0', fontSize: '1.5rem' }} onClick={() => onDisplay()}>
                     <Icon name='bars' inverted style={{ paddingTop: '0.1rem' }} />

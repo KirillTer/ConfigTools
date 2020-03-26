@@ -3,6 +3,10 @@
     {
       "pattern": "dist/(*)-(*)-(*).zip",
       "target": "vf-html-content/com/virtuefusion/html/{1}/{2}-{3}/{1}-{2}-{3}.zip"
+    },
+    {
+      "pattern": "dist/(*)-(*)-(*).pom",
+      "target": "vf-html-content/com/virtuefusion/html/{1}/{2}-{3}/{1}-{2}-{3}.pom"
     }
   ]
 }

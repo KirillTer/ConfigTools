@@ -2,16 +2,19 @@ import { put, call, takeLatest, all } from 'redux-saga/effects';
 import { history } from '../configureStore'
 
 import {
-    LOAD_MAIN_START, LOAD_MAIN_SUCCESS, LOAD_MAIN_FAILURE,
+    LOAD_MAIN_START, LOAD_MAIN_SUCCESS, LOAD_MAIN_FAILURE, LOGIN_SAVE,
+    LOAD_LANGUAGE_START, LOAD_LANGUAGE_SUCCESS, LOAD_LANGUAGE_FAILURE,
+    // SET_LANGUAGE_START, SET_LANGUAGE_SUCCESS, SET_LANGUAGE_FAILURE,
     LOGIN_START, LOGIN_SUCCESS, LOGIN_FAILURE,
     SINGUP_START, SINGUP_SUCCESS, SINGUP_FAILURE,
+    CHANGEPASS_START, CHANGEPASS_SUCCESS, CHANGEPASS_FAILURE,
     LOGOUT_START, LOGOUT_SUCCESS, LOGOUT_FAILURE,
     FEATCH_BINGO_ROOM_START, FEATCH_BINGO_ROOM_SUCCESS, FEATCH_BINGO_ROOM_FAILURE,
     CREATE_BINGO_ROOM_START, CREATE_BINGO_ROOM_SUCCESS, CREATE_BINGO_ROOM_FAILURE,
     EDIT_BINGO_ROOM_START, EDIT_BINGO_ROOM_SUCCESS, EDIT_BINGO_ROOM_FAILURE,
     DELETE_BINGO_ROOM_START, DELETE_BINGO_ROOM_SUCCESS, DELETE_BINGO_ROOM_FAILURE
 } from '../actionTypes'
-import { fetchMainApi, singInApi, singUpApi, featchBingoRoomApi, createBingoRoomApi, editBingoRoomApi, deleteBingoRoomApi } from '../../api'
+import { fetchMainApi, fetchLanguageApi, singInApi, singUpApi, changePassApi, featchBingoRoomApi, createBingoRoomApi, editBingoRoomApi, deleteBingoRoomApi } from '../../api'
 
 //Saga to receive core/initial data for application menu, categories etc...
 function* callFetchMain() {
@@ -23,12 +26,29 @@ function* callFetchMain() {
     }
 }
 
+//Saga to receive languages
+function* callFetchLanguage(action) {
+    try {
+        const result = yield call(fetchLanguageApi, action.payload)
+        yield put({ type: LOAD_LANGUAGE_SUCCESS, payload: result });
+    } catch (error) {
+        yield put({ type: LOAD_LANGUAGE_FAILURE, payload: error });
+    }
+}
+
 //Saga to handle login
 function* callSingIn(action) {
-    console.log('SAGA action SingIN payload - ', action)
     try {
         const userResult = yield call(singInApi, action.payload)
-        console.log('SAGA after API SingIN user - ', userResult)
+        if (userResult.body.status === "locked") {
+            throw new Error(userResult.body.status);
+        }
+        if (userResult.body.status === "pw") {
+            console.log('PW')
+            yield put({ type: LOGIN_SAVE, payload: action.payload });
+            history.push('/auth/changepass')
+            throw new Error(userResult.body.status);
+        }
         if (userResult.code === 'auth/wrong-password' || userResult.code === 'auth/too-many-requests') {
             throw new Error(userResult.message);
         } else {
@@ -37,17 +57,18 @@ function* callSingIn(action) {
             history.push('/main/Home')
         }
     } catch (error) {
-        console.log('SAGA after API SingIN ERROR - ', error.message)
+        console.log('Error', error.message)
+        if (error.message === 'Unauthorized' || error.message === 'locked') {
+            error.message = 'WE HAVE NOT BEEN ABLE TO LOG YOU IN. PLEASE CHECK YOUR USERNAME & PASSWORD, AND TRY AGAIN.'
+        }
         yield put({ type: LOGIN_FAILURE, payload: error.message });
     }
 }
 
 //Saga to handle singup
 function* callSingUp(action) {
-    console.log('SAGA action SingUP payload - ', action)
     try {
         const userResult = yield call(singUpApi, action.payload)
-        console.log('SAGA after API SingUP user - ', userResult)
         if (userResult.code === 'auth/wrong-password') {
             throw new Error(userResult.message);
         } else {
@@ -60,13 +81,24 @@ function* callSingUp(action) {
     }
 }
 
+//Saga to handle change password
+function* callChangePass(action) {
+    console.log('saga change password', action)
+    try {
+        const changePassResult = yield call(changePassApi, action.payload)
+        yield put({ type: CHANGEPASS_SUCCESS, payload: changePassResult });
+        history.push('/main/Home')
+    } catch (error) {
+        yield put({ type: CHANGEPASS_FAILURE, payload: error });
+    }
+}
+
 //Saga to handle logout
 function* callLogOut(action) {
-    console.log('SAGA action LogOut payload - ', action)
     try {
         yield put({ type: LOGOUT_SUCCESS });
         localStorage.removeItem("token");
-        history.push('/auth');
+        history.push('/auth/singin');
     } catch (error) {
         yield put({ type: LOGOUT_FAILURE, payload: error });
     }
@@ -140,11 +172,17 @@ function* callBingoRoomDelete(action) {
 function* mainWatcher() {
     yield takeLatest(LOAD_MAIN_START, callFetchMain)
 }
+function* languageWatcher() {
+    yield takeLatest(LOAD_LANGUAGE_START, callFetchLanguage)
+}
 function* singInWatcher() {
     yield takeLatest(LOGIN_START, callSingIn)
 }
 function* singUpWatcher() {
     yield takeLatest(SINGUP_START, callSingUp)
+}
+function* changePassWatcher() {
+    yield takeLatest(CHANGEPASS_START, callChangePass)
 }
 function* logOutWatcher() {
     yield takeLatest(LOGOUT_START, callLogOut)
@@ -166,9 +204,11 @@ function* deleteBingoRoomWatcher() {
 export default function* rootSaga() {
     yield all([
         mainWatcher(),
+        languageWatcher(),
         singInWatcher(),
         singUpWatcher(),
         logOutWatcher(),
+        changePassWatcher(),
         featchBingoRoomWatcher(),
         createBingoRoomWatcher(),
         editBingoRoomWatcher(),

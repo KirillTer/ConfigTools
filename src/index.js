@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { ConnectedRouter } from "connected-react-router";
 import configureStore, { history } from "./store/configureStore";
+import './i18n';
 
 import Layout from "./containers/layout/Layout";
 import AuthView from "./containers/auth/Auth.connect";

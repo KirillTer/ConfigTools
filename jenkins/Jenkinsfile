@@ -55,6 +55,13 @@ pipeline{
 					serverId: "-283547227@1458215185321",
 					specPath: 'jenkins/uploadSpec.json'
 				)
+				rtMavenDeployer (
+					id:"back_office_deployer",
+					serverId: "-283547227@1458215185321",
+					releaseRepo : "internal",
+					snapshotRepo : "internal",
+					deployArtifacts : false
+				)
 				script {
 					currentBuild.result = 'SUCCESS'
 				}
